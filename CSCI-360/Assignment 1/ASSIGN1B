@@ -1,0 +1,39 @@
+//KC03C96A JOB ,'TRISTEN ANDERSON',MSGCLASS=H                           00010000
+//STEP1 EXEC PGM=ASSIST                                                 00020000
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                        00030000
+//SYSPRINT DD SYSOUT=*                                                  00040000
+//SYSIN DD *                                                            00050000
+********************************************                            00060000
+* ASSIGN1 PART B                                                        00070000
+*                                                                       00080000
+* NAME:  Tristen Anderson                                               00090000
+*                                                                       00100000
+* Register Usage                                                        00110000
+*                                                                       00120000
+* 15     Base Register                                                  00130000
+*  1     FIRST Add                                                      00140000
+*  2     SECOND Add                                                     00150000
+*  3     FIRST Subtract                                                 00160000
+*  4     SECOND Subtract                                                00170000
+*                                                                       00180000
+********************************************                            00200000
+MAIN     CSECT                                                          00210000
+         USING MAIN,15                                                  00220000
+         L     1,FIRST       Load FIRST into R1                         00230001
+         L     2,SECOND      Load SECOND into R2                        00240001
+         AR    1,2           Add R2 to R1 and store in R1               00250001
+         ST    1,SUM         Store R1 in SUM                            00260001
+         L     3,FIRST       Load FIRST into R3                         00270001
+         L     4,SECOND      Load SECOND into R4                        00280001
+         SR    4,3           Subtract R4 from R3, store in R4           00290001
+         ST    4,DIFF        Store the R4 in DIFF                       00300001
+         XDUMP SUM,4                                                    00310000
+         XDUMP DIFF,4                                                   00320000
+         BR    14                                                       00330000
+FIRST    DC    F'219'                                                   00340000
+SECOND   DC    F'83'                                                    00350000
+SUM      DS    F                                                        00360000
+DIFF     DS    F                                                        00370000
+         END   MAIN                                                     00380000
+/*                                                                      00390000
+//                                                                      00400000

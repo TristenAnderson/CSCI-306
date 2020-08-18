@@ -1,0 +1,98 @@
+//KC03C96A JOB ,'Tristen Anderson',MSGCLASS=H                           00010000
+//STEP1    EXEC  PGM=ASSIST                                             00020000
+//STEPLIB    DD  DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                    00030000
+//SYSPRINT   DD  SYSOUT=*                                               00040000
+//SYSIN      DD  *                                                      00050000
+************************************************************            00060000
+*                                                                       00070000
+*  Program:     ASSIGN2                                                 00080000
+*  Programmer:  Tristen Anderson                                        00090000
+*                                                                       00100000
+*  Register usage:                                                      00110000
+*                                                                       00120000
+*    1        Used by XDECI                                             00121000
+*   15        Base register                                             00122000
+*    2        Used to store W                                           00122116
+*    3        Used to store X                                           00122216
+*    4        Used to store Y                                           00122316
+*    5        Used to store Z                                           00122416
+*    6        holds result                                              00122516
+*    7        Add up the line count                                     00122616
+*    8        Add up the sum of results                                 00122716
+*                                                                       00123000
+************************************************************            00130000
+MAIN     CSECT                                                          00140000
+         USING MAIN,15                                                  00141001
+         SR    7,7               Clear R7 for line count                00141106
+         SR    8,8               Clear R8 to hold sum                   00141206
+LOOP     XREAD BUFFER,80         Read first line to buffer              00141304
+         BC    B'0100',ENDLOOP   Look for file end                      00141404
+         A     7,=F'1'           Add one to count                       00141505
+         XDECI 2,BUFFER          Store W in R2                          00141606
+         XDECI 3,0(1)            Store X in R3                          00141706
+         XDECI 4,0(1)            Store Y in R4                          00141806
+         XDECI 5,0(1)            Store Z in R5                          00141906
+         LR    6,5               Load Z into R6                         00142006
+         SR    6,4               Add Z - Y store in R6                  00142212
+         SR    6,2                   Z - W                              00142416
+         AR    6,3                   Z + X                              00142516
+         AR    8,6               Add result to sum                      00142606
+         XDECO 2,WCOL            Format W and store in WCOL             00142716
+         XDECO 3,XCOL            Format X and store in XCOL             00142816
+         XDECO 4,YCOL            Format Y and store in YCOL             00142916
+         XDECO 5,ZCOL            Format Z and store in ZCOL             00143016
+         XDECO 6,RCOL            Format R and store in RCOL             00143116
+         XPRNT LINE,114          Print formatted line                   00143214
+         BC    B'1111',LOOP      return to top loop                     00143304
+ENDLOOP  DS    0H                                                       00143404
+         XDECO 7,NUML            format line count and store NUML       00143516
+         XDECO 8,SUM             format sum of result, put in SUM       00143616
+         XPRNT LINEB,66          Print sum and line count               00143716
+         BR    14                                                       00143800
+         LTORG              Literals go here                            00143906
+LINE     DS    C' '         Start formatted line                        00144006
+         DC    CL3'W ='                                                 00144100
+WCOL     DS    CL12         Var for W Col                               00144208
+         DC    CL8' '                                                   00144312
+         DC    CL3'Y ='                                                 00144400
+XCOL     DS    CL12         Var for X Col                               00144508
+         DC    CL8' '                                                   00144612
+         DC    CL3'X ='                                                 00144700
+YCOL     DS    CL12         Var for Y Col                               00144808
+         DC    CL8' '                                                   00144912
+         DC    CL3'Z ='                                                 00145002
+ZCOL     DS    CL12         Var for Z Col                               00145108
+         DC    CL8' '                                                   00145212
+         DC    CL8'Result ='                                            00145302
+RCOL     DS    CL12' '                                                  00145402
+LINEB    DC    C' '         Start fomratted string                      00145507
+         DC    CL17'Number of Lines = '                                 00145610
+NUML     DS    CL12         Var for num lines                           00145707
+         DC    CL8' '                                                   00145807
+         DC    CL16'Sum of Results ='                                   00145910
+SUM      DS    CL12         Var for sum                                 00146008
+BUFFER   DS    0C           Buffer to read lines                        00146103
+         END   MAIN                                                     00147000
+/*                                                                      00150000
+//FT05F001   DD  *                                                      00160000
+   005   005   005   005                                                00170000
+   001   002   004   006                                                00180000
+    +7     2   -45     0                                                00190000
+   088   035    10   100                                                00200000
+     0     0     0     0                                                00210000
+   -10    10   -10    10                                                00220000
+   230     9    58   500                                                00230000
+   853     0    17   516                                                00240000
+     0   245   316   020                                                00250000
+   977   681     0   529                                                00260000
+   250    85   831   013                                                00270000
+   364   275     0     0                                                00280000
+   100   293   993   887                                                00290000
+   447   591    13   234                                                00300000
+    -7    23   104   -89                                                00310000
+   002   003   004   001                                                00320000
+   007   006   005   008                                                00330000
+   998   997   996   999                                                00340000
+/*                                                                      00350000
+//FT06F001   DD SYSOUT=*                                                00360000
+//                                                                      00370000

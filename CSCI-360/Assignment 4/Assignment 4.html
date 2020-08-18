@@ -1,0 +1,192 @@
+
+<!-- saved from url=(0060)http://faculty.cs.niu.edu/~hutchins/csci360/homework/hw4.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Assignment 4</title>
+</head>
+
+<body data-gr-c-s-loaded="true">
+
+<center>
+<h2><b>
+<p>Assignment 4
+</p></b><p><b>100 points
+</b></p></h2></center>
+
+<p><b>Overview</b>
+
+</p><p>In this assignment, you will write a program that will read integers
+   from a file of 80-byte records, with zero or more numbers per record,
+   and store the integers in a table.
+
+</p><p>Read the file and process the integers on each line.  Store each one
+   in the table.  The table may or may not be entirely full.  Store the 
+   address of the first entry not in use.
+
+</p><p>To verify the loading of the table, print out the entire table with
+   7 numbers per line.  The last line may not have as many as 7.
+
+</p><p>After that, print a list of all of the even integers with 5 numbers per 
+   line.  (An integer M is even if the remainder of dividing M by 2 is 0.)  
+   The last line may not have as many as 5 numbers on it so part of it may be blank.
+
+</p><p>We will use <u>internal subroutines</u> to structure this program.
+   (See the instructions listed below.)
+   
+</p><p></p><hr>
+
+<p><b>Input</b>
+
+</p><p>The input to the program will be a file with an unknown number of
+   records.  Each record contains zero or more integers, separated by
+   spaces.
+
+</p><p>Use the following JCL statement to specify the input file:
+
+</p><pre>     //FT05F001  DD  DSN=KC02314.SPRING20.CSCI360.HW4DATA,DISP=SHR</pre>
+
+<p></p><hr>
+
+<p><b>Internal Subroutines</b>
+
+</p><p>You will need several internal subroutines:
+
+</p><ul>
+ <li>BUILD is a subroutine that will read the input file and build
+     the table.  It will store the address of the last entry in
+     a fullword passed in as a parameter.
+     <p>
+ </p></li><li>PRINT is a subroutine that will print the entire table (up to
+     the last entry in use).
+     <p>
+ </p></li><li>EVENS is a subroutine that will print only the even values
+     in the table.
+</li></ul>
+
+<p>There are several requirements for using an internal subroutine:
+
+</p><ul>
+ <li>You need a label with the name of the subroutine, as in:
+
+<pre>     BUILD    DS    0H</pre>
+     <p>
+ </p></li><li>You need to create a parameter list for the subroutine (a set
+     of consecutive fullwords, each containing the address of a
+     parameter).
+
+     <p>What parameters should each subroutine have?  Each of these
+        three subroutines needs to receive two items:  the
+        address of the table itself, and the address of a fullword
+        in which we store the address of the first unused entry.
+        List them in that order.
+     </p><p>
+ </p></li><li>You need to call the subroutine, as in:
+
+<pre>     LA      1,BPARMS    Parameter list for BUILD
+     BAL     11,BUILD    Branch to BUILD</pre>
+
+     <p>Here the BAL instruction will set register 11 = the address
+        of the next instruction after the BAL.
+     </p><p>
+ </p></li><li>You need to return from the subroutine, as in:
+
+<pre>     BR      11</pre>
+     <p>
+ </p></li><li>You will need to use some registers in each subroutine.  When
+     you exit from the subroutine, these registers should have the
+     same values as they had before the subroutine was called.  To
+     accomplish this, set up a save area (a set of consecutive
+     fullwords) and save the register values using STM, and later,
+     just before the subroutine ends, restore the original values
+     using LM.
+</li></ul>     
+
+<p></p><hr>
+
+<p><b>Assorted Requirements and Notes</b>
+
+</p><ul>
+ <li>The JCL for this assignment is the same as the JCL used in
+     Assignment 3 except for the line given above to provide the
+     data.
+     <p>
+ </p></li><li>Define the table to hold 60 values.  Each entry is one fullword.
+     Initialize entries in the table to the value -256, as in 60F'-256'.
+     <p>
+ </p></li><li>It is possible that the input file might contain more than 60
+     values.  We do not want to over-fill the table.  (Nothing will
+     protect us from this.)  As you put numbers into the table,
+     count them.  If you reach 60, stop, even if there are more
+     numbers in the file.
+     <p>
+ </p></li><li>The main program mostly consists of calls to subroutines and 
+     the definitions of variables.
+     <p>
+ </p></li><li>In BUILD, you will need two loops. The outer loop reads the records 
+     using XREAD and stops when it detects the end of the file.  The inner
+     loop processes one record, using XDECI to obtain each integer
+     in turn.  Be sure to stop at the end of the record.  Each of these
+     should be a <i>top-driven</i> loop.
+     <p>
+ </p></li><li>You will need to blank out your print lines.  You can do this with
+     a standard trick called <u>destructive overlap</u>.  For a line 
+     of length 61, you can do the following:
+
+<pre>         MVI   PLINE+1,C' '
+         MVC   PLINE+2(59),PLINE+1</pre>
+     <p>Here we are not changing the first byte in PLINE because
+        it is the carriage-control character.
+     </p><p>
+ </p></li><li>Use a non-numeric marker at the end of the input storage area to stop
+     the XDECI scan, like this:
+  
+<pre>BUFFER   DS    CL80
+         DC    C'*'</pre>
+     <p>
+ </p></li><li>You may use <u>register equates</u> if you like.  You can read
+     about these in our textbook, page 65.  This is not required.
+     <p>
+ </p></li><li>You may use extended mnemonics such as BH, BL, BNE, etc. for branch
+     instructions.  This is not required.
+     <p>
+ </p></li><li>In this assignment, avoid using labeled constants in storage; use
+     instead LA instructions or literals.
+     <p>
+ </p></li><li>In PRINT, you will need print lines of at least 61 bytes each
+     (including the carriage-control character).  Double-space between
+     lines of numbers.  Each list of numbers should start on a new page
+     and have a heading, centered, stating "List of numbers" or "List of
+     even numbers".  Leave two lines blank after the heading.
+     <p>
+ </p></li><li>Your program needs to have adequate documentation.  We need a
+     box of documentation for each subroutine, including its name
+     and a statement of what it does, along with a list of what
+     registers have been used and how.  We also need line documentation.
+     <p>
+ </p></li><li>A problem here is how to print 7 numbers on a line.  One way to do
+     this is to treat the print line as a table of 7 values of 12 bytes
+     each:
+
+     <ul type="DISC">
+      <li>Load the address of LINE+1 into a register (pointer into
+          the line).
+      </li><li>Counter = 0.
+      </li><li>While the Counter is &lt; 7:
+       <ul type="SQUARE">
+        <li>Use XDECO to put a number from the table on the line at the
+            address in the register.
+        </li><li>Advance the pointer into the line by 12.
+        </li><li>Increment the table pointer.
+        </li><li>Increment the counter.
+       </li></ul>
+      </li><li>Use XPRNT to print the line.
+      </li><li>Use destructive overlap to restore the line to its original
+          condition.
+     </li></ul>
+
+     <p>and then repeat.
+</p></li></ul>
+
+
+
+
+</body></html>

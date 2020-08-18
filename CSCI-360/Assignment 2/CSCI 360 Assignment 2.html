@@ -1,0 +1,169 @@
+
+<!-- saved from url=(0060)http://faculty.cs.niu.edu/~hutchins/csci360/homework/hw2.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>CSCI 360 Assignment 2</title>
+</head>
+
+<body data-gr-c-s-loaded="true">
+
+<center>
+<h2><b>
+<p>Assignment 2
+</p></b><p><b>80 points
+</b></p></h2>
+</center>
+
+<p>For this assignment you will write a program that reads in an unknown
+   number of lines, each containing 3-digit numbers, 4 per line.  For each 
+   line read, print out the numbers W, X, Y and Z, calculate the value
+   of Z - Y - X + W and print the result, single-spaced.
+
+</p><p>Each line has the following format:
+</p><pre>     columns 1--3   blank
+     columns 4--6   first number W
+     columns 7--9   blank
+     columns 10-12  second number X
+     columns 13-15  blank
+     columns 16-18  third number Y
+     columns 19-21  blank
+     columns 22-24  fourth number Z
+     columns 25-80  blank</pre>
+
+<p>When all processing is done, skip a line and then print the sum of the 
+   result values from all of the lines and the number of lines read.
+
+</p><p>Write your program incrementally!  That means that you should begin by just
+   reading one record and print out those numbers.  When that works,
+   put in a loop. If you get one part working before moving on to
+   the next, your debugging will be much easier and less time-consuming.
+
+</p><p>Use a top driven loop:
+
+</p><pre>Initialize the counter and the total
+     Top of the loop
+      Read a record
+      If end-of-file, branch to the end of the loop
+      Deal with the record just read using XDECI, arithmetic, XDECO and XPRNT
+      Add 1 to the counter
+      Add the result (Z - Y - X + W) of the numbers read to the total
+      Branch to the top of the loop
+     End of the loop
+     Use XDECO and XPRNT to print the summary lines</pre>
+
+<p>You will need to put labels on two lines, one for the top of the
+   loop and one for the bottom of the loop.  You can actually put a
+   label on any line of code, but many people put them on lines that
+   don't do anything else, like this:
+
+</p><pre>     MYLABEL  DS    0H</pre>
+
+<p>Here <u>DS    0H</u> takes up no space.  (It declares 0 halfwords on
+   a halfword boundary, and as each instruction is an even number of
+   bytes, the location will already be on a halfword boundary.)
+
+</p><p></p><hr>
+
+<p><b>JCL for this assignment</b>
+
+</p><p>Use the following JCL:
+
+</p><pre>//KCnumberA JOB ,'Your Name',MSGCLASS=H
+//STEP1    EXEC  PGM=ASSIST
+//STEPLIB    DD  DSN=KC02293.ASSIST.LOADLIB,DISP=SHR
+//SYSPRINT   DD  SYSOUT=*
+//SYSIN      DD  *
+************************************************************
+*
+*  Program:     ASSIGN2
+*  Programmer:  Your Name
+*
+*  Register usage:
+*
+************************************************************
+(Your program goes here.)
+/*
+//FT05F001   DD  *
+   005   005   005   005
+   001   002   004   006
+    +7     2   -45     0
+   088   035    10   100  
+     0     0     0     0
+   -10    10   -10    10  
+   230     9    58   500 
+   853     0    17   516
+     0   245   316   020
+   977   681     0   529
+   250    85   831   013
+   364   275     0     0
+   100   293   993   887  
+   447   591    13   234
+    -7    23   104   -89
+   002   003   004   001
+   007   006   005   008
+   998   997   996   999
+/*
+//FT06F001   DD SYSOUT=*
+//</pre>
+
+<p>As before, you will need to replace "Your Name" with your own
+   name, and you will need to replace "KCnumber" with your own
+   logon ID.
+
+</p><p>Your actual code should be after the comment box and before the
+   /* line.
+
+</p><p></p><hr>
+
+<p><b>Data</b>
+
+</p><p>As indicated above, the data is listed in the source code file
+   between the <u>FT05FT001</u> line and the following <u>/*</u> line.
+
+</p><p>This is known as <u>instream</u> data.  It is also possible to
+   read from a specific disk file by name, and we will do so later.
+
+</p><p></p><hr>
+
+<p><b>Other requirements</b>
+
+</p><p>In the JCL, at the very beginning of the program is a <u>comment
+   box</u>.  Notice the place that says "Register Usage".  Make a
+   list here of registers you used and how you made use of each one.
+   For instance, you will be using register 15 as your base register,
+   and register 1 is used by XDECI.  Thus you might have:
+
+</p><pre>*
+*  Register usage:
+*    1        Used by XDECI
+*   15        Base register
+*</pre>
+
+<p>and probably several more such lines.  It can be difficult in
+   assembly language to read the code without a guide to how
+   the various register are being used.
+
+</p><p>The comment box should also list your name and the number of
+   the assignment (Assignment 2).
+
+</p><p>To use XREAD, you will need to have an 80-byte field to contain
+   each line you read.
+
+</p><p>To produce the output, you will need to define a couple of output lines
+   containing DC and DS statements (with labels on the DS statements).
+
+</p><p>Your program should include <u>line documentation</u>.  At the
+   end of each line (certainly for most lines) skip one or more
+   spaces and insert a few words describing what that instruction
+   does.  Try to line these up so they start in the same column.
+   For instance:
+</p><pre>         SR    8,8                     Initialize counter.
+         SR    9,9                     Initialize total.</pre>
+
+<p>Name your program file something like "ASSIGN2" or "ASSIGN2".
+
+</p><p>Submit your program file and output file through Blackboard.
+
+
+
+
+</p></body></html>

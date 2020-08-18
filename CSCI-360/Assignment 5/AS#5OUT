@@ -1,0 +1,327 @@
+1                   J E S 2  J O B  L O G  --  S Y S T E M  2 9 6 4  --  N O D E  S V S C J E S 2        
+0 
+ 17.15.27 JOB09113 ---- THURSDAY,  19 MAR 2020 ----
+ 17.15.27 JOB09113  IRR010I  USERID KC03C96  IS ASSIGNED TO THIS JOB.
+ 17.15.27 JOB09113  ICH70001I KC03C96  LAST ACCESS AT 17:15:09 ON THURSDAY, MARCH 19, 2020
+ 17.15.27 JOB09113  $HASP373 KC03C96A STARTED - INIT 2    - CLASS A        - SYS 2964
+ 17.15.27 JOB09113  $HASP395 KC03C96A ENDED - RC=0000
+0------ JES2 JOB STATISTICS ------
+-  19 MAR 2020 JOB EXECUTION DATE
+-          235 CARDS READ
+-          331 SYSOUT PRINT RECORDS
+-            0 SYSOUT PUNCH RECORDS
+-           38 SYSOUT SPOOL KBYTES
+-         0.00 MINUTES EXECUTION TIME
+         1 //KC03C96A JOB ,'Tristen Anderson',MSGCLASS=H                           JOB09113
+         2 //STEP1 EXEC PGM=ASSIST                                                 00020000
+         3 //STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                        00030000
+         4 //SYSPRINT DD SYSOUT=*                                                  00040000
+         5 //SYSIN DD *                                                            00050000
+         6 //FT05F001  DD  DSN=KC02314.SPRING20.CSCI360.HW5DATA,DISP=SHR           00230000
+ ICH70001I KC03C96  LAST ACCESS AT 17:15:09 ON THURSDAY, MARCH 19, 2020
+ IEFA111I KC03C96A IS USING THE FOLLOWING JOB RELATED SETTINGS:
+          SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+ IEF236I ALLOC. FOR KC03C96A STEP1
+ IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+ IEF237I JES2 ALLOCATED TO SYSPRINT
+ IEF237I JES2 ALLOCATED TO SYSIN
+ IGD103I SMS ALLOCATED TO DDNAME FT05F001
+ IEF142I KC03C96A STEP1 - STEP WAS EXECUTED - COND CODE 0000
+ IGD104I KC02293.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+ IEF285I   KC03C96.KC03C96A.JOB09113.D0000102.?         SYSOUT        
+ IEF285I   KC03C96.KC03C96A.JOB09113.D0000101.?         SYSIN         
+ IGD104I KC02314.SPRING20.CSCI360.HW5DATA             RETAINED,  DDNAME=FT05F001
+ IEF373I STEP/STEP1   /START 2020079.1715
+ IEF032I STEP/STEP1   /STOP  2020079.1715 
+         CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+         VIRT:   584K  SYS:   248K  EXT:        0K  SYS:    13544K
+         ATB- REAL:                  4116K  SLOTS:                     0K
+              VIRT- ALLOC:      11M SHRD:       0M
+ IEF375I  JOB/KC03C96A/START 2020079.1715
+ IEF033I  JOB/KC03C96A/STOP  2020079.1715 
+         CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+1*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT         
+0                                                                                                                                 
+0                                                                                                               PAGE    1         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                       1 ********************************************                            00060000         
+                                       2 *                                                                       00070000         
+                                       3 *  Program: ASSIGN5                                                     00080000         
+                                       4 *  Programmer: Tristen Anderson                                         00090000         
+                                       5 *                                                                       00100000         
+                                       6 *  Register Usage:                                                      00110000         
+                                       7 *                                                                       00120000         
+                                       8 *    15   Base                                                          00130001         
+                                       9 *    2    Parameter list                                                00131001         
+                                      10 *    11   Location when branched                                        00131126         
+                                      11 *    13   Main Save area                                                00131226         
+                                      12 *    14   Do not use this register                                      00140001         
+                                      13 *                                                                       00150000         
+                                      14 ********************************************                            00160000         
+ 000000                               15 MAIN     CSECT                                                          00170000         
+ 000000                               16          USING MAIN,15                                                  00180000         
+1       Tristen Anderson, CSCI 360, Program 5                                                                   PAGE    2         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+ 000000 50E0 F084            00084    20          ST    14,EXIT           Store the exit location                00180410         
+ 000004 41D0 F03C            0003C    21          LA    13,MSAVE          Set the main save area                 00180509         
+ 000008 4120 F1B8            001B8    22          LA    2,PARMS           Load parms list to R1                  00181030         
+ 00000C 58B0 F030            00030    23          L     11,=V(BUILD)      Get addr of BUILD                      00182028         
+ 000010 05EB                          24          BALR  14,11             Branch to BUILD                        00182132         
+ 000012 4120 F1B8            001B8    25          LA    2,PARMS           Load PARMS                             00182232         
+ 000016 58B0 F034            00034    26          L     11,=V(PRINT)      Ger addr of PRINT                      00182332         
+ 00001A 05EB                          27          BALR  14,11             Branch to PRINT                        00182432         
+ 00001C 4120 F1B8            001B8    28          LA    2,PARMS           Load Parms                             00182552         
+ 000020 58B0 F038            00038    29          L     11,=V(HOWMANY)    Get addr of HOWMANY                    00182652         
+ 000024 05EB                          30          BALR  14,11             Branch to HOWMANY                      00182752         
+ 000026 58E0 F084            00084    31          L     14,EXIT           Load exit location                     00184010         
+ 00002A 07FE                          32          BR    14                End of program                         00190030         
+                                      33 *********************************************************               00191030         
+                                      34 * MAIN VARIABLES GO HERE                                                00192030         
+                                      35 *********************************************************               00193030         
+                                      36          LTORG                Literals go here                          00200024         
+ 000030 000001C8                      37                =V(BUILD)                                                                 
+ 000034 000002B8                      38                =V(PRINT)                                                                 
+ 000038 00000418                      39                =V(HOWMANY)                                                               
+ 00003C                               40 MSAVE    DS    18F                                                      00200130         
+ 000084                               41 EXIT     DS    F                                                        00200230         
+ 000088                               42 TABLE    DS    75F'-16'       Table of 75 Fullwords                     00201026         
+ 0001B4                               43 ENDTABLE DS    0H             Marks the end of the table                00202024         
+ 0001B4 00000088                      44 EOT      DC    A(TABLE)       Addres if 1rst unused entry               00203024         
+ 0001B8 00000088                      45 PARMS    DC    A(TABLE)       Parameter List                            00203130         
+ 0001BC 000001B4                      46          DC    A(ENDTABLE)                                              00203230         
+ 0001C0 000001B4                      47          DC    A(EOT)                                                   00203330         
+                                      48 ********************************************                            00204001         
+                                      49 *  BUILD SUB ROUTINE                                                    00204130         
+                                      50 *                                                                       00204230         
+                                      51 *  Register Usage                                                       00204326         
+                                      52 *                                                                       00204426         
+                                      53 *    1        XDECI                                                     00204526         
+                                      54 *    2        Holds a num from buffer                                   00204626         
+                                      55 *    3        Addr of table                                             00204726         
+                                      56 *    4        addr of table end                                         00204826         
+                                      57 *    5        EOT                                                       00204926         
+                                      58 *    12       Base                                                      00205026         
+                                      59 *    13       Save area                                                 00205126         
+                                      60 *    14       return addr                                               00205226         
+                                      61 *                                                                       00205326         
+                                      62 ********************************************                            00205426         
+ 0001C8                               63 BUILD    CSECT                                                          00205501         
+                                      64 * Standard Entry Linkage Here                                           00206001         
+ 0001C8 90EC D00C            0000C    65          STM   14,12,12(13)   Save all registers except 13              00207001         
+ 0001CC 18CF                          66          LR    12,15          Put addr of BUILD into R12                00208001         
+ 0001C8                               67          USING BUILD,11       Set R12 as the base reg for BUILD         00209028         
+ 0001CE 41E0 B0A8            00270    68          LA    14,SAVEB       Load save area addrto R14                 00209101         
+ 0001D2 50D0 E004            00004    69          ST    13,4(,14)      Save the forward ptr                      00209224         
+ 0001D6 50E0 D008            00008    70          ST    14,8(,13)      Save the back ptr                         00209324         
+ 0001DA 18DE                          71          LR    13,14          Point R13 at BSAVE                        00209401         
+                                      72 *                                                                       00209511         
+ 0001DC 9835 2000            00000    73          LM    3,5,0(2)       Load parms into R3 through R5             00209631         
+1       Tristen Anderson, CSCI 360, Program 5                                                                   PAGE    3         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 0001E0 E000 B054 0050 0021C          74 BLOOP    XREAD BUFFER,80      Read a line from the buffer               00209720         
+ 0001E6 4740 B042            0020A    75          BC    B'0100',BLEND  If failed then end                        00209821         
+ 0001EA 4110 B054            0021C    76          LA    1,BUFFER       Load buffer to R1                         00209920         
+ 0001EE 5360 1000            00000    77 BLOOPIN  XDECI 6,0(0,1)       Read a num from the buffer                00210031         
+ 0001F2 4710 B018            001E0    78          BC    B'0001',BLOOP     if line empty get a new one            00210121         
+ 0001F6 5960 B050            00218    79          C     6,=F'-123456789' Check if delimeter                      00210231         
+ 0001FA 4780 B042            0020A    80          BE    BLEND             if delimeter then end                  00210320         
+ 0001FE 5060 3000            00000    81          ST    6,0(0,3)          add num to table                       00210431         
+ 000202 4130 3004            00004    82          LA    3,4(0,3)          advance table position                 00210523         
+ 000206 47F0 B026            001EE    83          BC    B'1111',BLOOPIN   return to inner loop                   00210820         
+ 00020A                               84 BLEND    DS    0H                end loop                               00210920         
+ 00020A 5030 5000            00000    85          ST    3,0(0,5)          Store EOT                              00211034         
+                                      86 * Standard Exit Linkage                                                 00211101         
+ 00020E 58D0 D004            00004    87          L     13,4(,13)      Load calling routine save area to R13     00211201         
+ 000212 98EC D00C            0000C    88          LM    14,12,12(13)   Reloads calling rtns registers,not R13    00211601         
+ 000216 07FE                          89          BR    14             End Subroutine                            00211801         
+                                      90          LTORG                Literals go here                          00211901         
+ 000218 F8A432EB                      91                =F'-123456789'                                                            
+ 00021C                               92 BUFFER   DS    80C                                                      00212001         
+ 00026C 5C                            93          DC    C'*'                                                     00212101         
+ 000270                               94 SAVEB    DS    18F'0'                                                   00212301         
+                                      95 **********************************                                      00212401         
+                                      96 *  PRINT SUBROUTINE                                                     00212533         
+                                      97 *                                                                       00212632         
+                                      98 *  Register Usage:                                                      00212733         
+                                      99 *                                                                       00212832         
+                                     100 *    1        Used by XDECI                                             00212933         
+                                     101 *    2        PARMS                                                     00213033         
+                                     102 *    3        Addres of table                                           00213133         
+                                     103 *    4        EOT                                                       00213233         
+                                     104 *    6        Hold a num from table                                     00213333         
+                                     105 *    7        Width Counter                                             00213433         
+                                     106 *   11        Address of main                                           00213533         
+                                     107 *   13        Main save                                                 00213633         
+                                     108 *   14        dont use                                                  00213733         
+                                     109 *   15        Base register                                             00213833         
+                                     110 *                                                                       00213932         
+                                     111 ***********************************                                     00214032         
+ 0002B8                              112 PRINT    CSECT                                                          00214132         
+                                     113 * Standard Entry Linkage                                                00214232         
+ 0002B8 90EC D00C            0000C   114          STM   14,12,12(13)                                             00214332         
+ 0002BC 18CF                         115          LR    12,15                                                    00214432         
+ 0002B8                              116          USING PRINT,11                                                 00214532         
+ 0002BE 41E0 B090            00348   117          LA    14,PSAVE                                                 00214632         
+ 0002C2 50D0 E004            00004   118          ST    13,4(,14)                                                00214732         
+ 0002C6 50E0 D008            00008   119          ST    14,8(,13)                                                00214832         
+ 0002CA 18DE                         120          LR    13,14                                                    00214932         
+                                     121 *                                                                       00215032         
+ 0002CC 9835 2000            00000   122          LM    3,5,0(2)           Unload PARMS to R3 - R5               00215152         
+ 0002D0 5850 5000            00000   123          L     5,0(0,5)             Load EOT to R5                      00215252         
+ 0002D4 E020 B12D 002D 003E5         124          XPRNT THEAD,45             Print table header                  00215752         
+ 0002DA 4180 B0E5            0039D   125 PLOOPO   LA    8,PLINE+1            Load addr of PLINE to R8            00215852         
+ 0002DE 9240 B0E5      0039D         126          MVI   PLINE+1,C' '         clear out print line                00215952         
+ 0002E2 D252 B0E6 B0E5 0039E 0039D   127          MVC   PLINE+2(83),PLINE+1  destructive overlap                 00216052         
+ 0002E8 1B77                         128          SR    7,7                  Clear out width counter             00216152         
+ 0002EA 1935                         129          CR    3,5                  Check if at table end               00216252         
+ 0002EC 47A0 B06E            00326   130          BC    B'1010',PEND         If at table end then print          00216352         
+1       Tristen Anderson, CSCI 360, Program 5                                                                   PAGE    4         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 0002F0 5970 B088            00340   131 PLOOP    C     7,=F'6'              Check if width is 6                 00216452         
+ 0002F4 4780 B064            0031C   132          BE    PEND2                If width is 6, then print line      00216552         
+ 0002F8 5860 3000            00000   133          L     6,0(0,3)             load a num from table to R6         00216652         
+ 0002FC 5260 B0D8            00390   134          XDECO 6,NUMB               format numb in base 10              00216752         
+ 000300 D20B 8000 B0D8 00000 00390   135          MVC   0(12,8),NUMB         add num to print line               00216852         
+ 000306 4180 800C            0000C   136          LA    8,12(0,8)            advance print line                  00216952         
+ 00030A 4130 3004            00004   137          LA    3,4(0,3)             Advance table ptr                   00217052         
+ 00030E 5A70 B08C            00344   138          A     7,=F'1'              Add one to width count              00217152         
+ 000312 1935                         139          CR    3,5                  Check if at end of table            00217252         
+ 000314 47A0 B06E            00326   140          BC    B'1010',PEND         If at end of table, end             00217352         
+ 000318 47F0 B038            002F0   141          B     PLOOP            Return to inner loop                    00217452         
+ 00031C E020 B0E4 0049 0039C         142 PEND2    XPRNT PLINE,73         Print a row from table                  00217552         
+ 000322 47F0 B022            002DA   143          B     PLOOPO           Return to outer loop                    00217652         
+ 000326 E020 B0E4 0049 0039C         144 PEND     XPRNT PLINE,73         Print a row from the table              00217752         
+ 00032C E020 B15A 0001 00412         145          XPRNT BLANK,1          Print a blank line                      00217852         
+                                     146 * Standard Exit Linkage                                                 00217932         
+ 000332 58D0 D004            00004   147          L     13,4(,13)                                                00218032         
+ 000336 98EC D00C            0000C   148          LM    14,12,12(13)                                             00218132         
+ 00033A 07FE                         149          BR    14               Return to Main                          00218232         
+                                     150          LTORG                                                          00218332         
+ 000340 00000006                     151                =F'6'                                                                     
+ 000344 00000001                     152                =F'1'                                                                     
+ 000348                              153 PSAVE    DS    18F                                                      00218432         
+ 000390                              154 NUMB     DS    CL12                                                     00218533         
+ 00039C F0                           155 PLINE    DC    C'0'                                                     00218633         
+ 00039D                              156          DS    CL72                                                     00218733         
+ 0003E5 F1                           157 THEAD    DC    C'1'                                                     00218838         
+ 0003E6 4040404040404040             158          DC    CL30' '                                                  00218938         
+ 000404 E38182938540C396             159          DC    CL14'Table Contents'                                     00219038         
+ 000412 F1                           160 BLANK    DC    C'1'                                                     00219151         
+                                     161 *************************************************                       00219232         
+                                     162 *  HOWMANY SUBROUTINE                                                   00219341         
+                                     163 *                                                                       00219441         
+                                     164 *  Register Usage:                                                      00219541         
+                                     165 *                                                                       00219641         
+                                     166 *    2        Holds PARMS                                               00219741         
+                                     167 *    3        Addr of Table                                             00219852         
+                                     168 *    4        Addr of table end                                         00219952         
+                                     169 *    5        EOT                                                       00220052         
+                                     170 *    6        Count for num mults                                       00220152         
+                                     171 *    8        Used in division                                          00220252         
+                                     172 *    9        Holds table entry                                         00220352         
+                                     173 *   10        Holds divisor from input file                             00220452         
+                                     174 *   11        base reg for HOWMANY                                      00220552         
+                                     175 *   13        Main save                                                 00220652         
+                                     176 *   14        Dont use                                                  00220752         
+                                     177 *   15        Base reg                                                  00220852         
+                                     178 *                                                                       00220941         
+                                     179 **************************************************                      00221041         
+ 000418                              180 HOWMANY  CSECT                                                          00221141         
+                                     181 * Standard Entry Linkage                                                00221241         
+ 000418 90EC D00C            0000C   182          STM   14,12,12(13)                                             00221341         
+ 00041C 18CF                         183          LR    12,15                                                    00221441         
+ 000418                              184          USING HOWMANY,11                                               00221541         
+ 00041E 41E0 B090            004A8   185          LA    14,HSAVE                                                 00221641         
+ 000422 50D0 E004            00004   186          ST    13,4(,14)                                                00221741         
+ 000426 50E0 D008            00008   187          ST    14,8(,13)                                                00221841         
+1       Tristen Anderson, CSCI 360, Program 5                                                                   PAGE    5         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 00042A 18DE                         188          LR    13,14                                                    00221941         
+                                     189 *                                                                       00222041         
+ 00042C 9835 2000            00000   190          LM    3,5,0(2)         Unload PARMS                            00222141         
+ 000430 5800 5000            00000   191          L     0,0(0,5)         Load in EOT                             00222241         
+                                     192 *                                                                       00222342         
+ 000434 1B66                         193          SR    6,6              Clear the count register                00222448         
+ 000436 903A B0D8            004F0   194          STM   3,10,VARS        Save the registers                      00222543         
+ 00043A                              195 RESET    DS    0H                                                       00222643         
+ 00043A 983A B0D8            004F0   196          LM    3,10,VARS        Restore the registers                   00222743         
+ 00043E E000 B0F4 0050 0050C         197 READ     XREAD BUFF,80          Read a line from the file               00222843         
+ 000444 4740 B078            00490   198          BL    HEND             If fail the end                         00222943         
+ 000448 4110 B0F4            0050C   199          LA    1,BUFF           Load buffer to R1                       00223043         
+ 00044C 53A0 1000            00000   200          XDECI 10,0(0,1)         Read num from buffer                   00223148         
+ 000450 4710 B026            0043E   201          BO    READ             If failed grab a new line               00223248         
+ 000454 52A0 B160            00578   202          XDECO 10,NUM            Format num in base 10                  00223348         
+ 000458 1935                         203 SEARCHT  CR    3,5              Check if at end of table                00223448         
+ 00045A 47A0 B06A            00482   204          BC    B'1010',PTABLE   If at end of table print line           00223548         
+ 00045E 5890 3000            00000   205          L     9,0(0,3)         Load a number from table to R9          00223652         
+ 000462 5C80 B088            004A0   206          M     8,=F'1'          Convert to 64 bit num                   00223752         
+ 000466 1D8A                         207          DR    8,10             Divide R9 by R10                        00223852         
+ 000468 4130 3004            00004   208          LA    3,4(0,3)         Adavnce the table ptr                   00223952         
+ 00046C 1935                         209          CR    3,5              Check if at end of table                00224052         
+ 00046E 47A0 B06A            00482   210          BC    B'1010',PTABLE   If at end of table print the line       00224152         
+ 000472 5980 B08C            004A4   211          C     8,=F'0'          Check if multiple of num                00224252         
+ 000476 4770 B040            00458   212          BNE   SEARCHT          If not then get a new num from table    00224352         
+ 00047A 5A60 B088            004A0   213          A     6,=F'1'          If it is then add one to count          00224452         
+ 00047E 47F0 B040            00458   214          B     SEARCHT          Grab a new num from table               00224552         
+ 000482                              215 PTABLE   DS    0H                                                       00224643         
+ 000482 5260 B170            00588   216          XDECO 6,MULTS          Format num mults in base 10             00224752         
+ 000486 E020 B145 0037 0055D         217          XPRNT LINE,55          Print the line                          00224852         
+ 00048C 47F0 B022            0043A   218          B     RESET            Restart until file empty                00224952         
+                                     219 * Standard Exit Linkage                                                 00225041         
+ 000490 58D0 D004            00004   220 HEND     L     13,4(,13)                                                00225143         
+ 000494 98EC D00C            0000C   221          LM    14,12,12(13)                                             00225241         
+ 000498 07FE                         222          BR    14                                                       00225341         
+                                     223          LTORG                                                          00225441         
+ 0004A0 00000001                     224                =F'1'                                                                     
+ 0004A4 00000000                     225                =F'0'                                                                     
+ 0004A8                              226 HSAVE    DS    18F                                                      00225541         
+ 0004F0                              227 VARS     DS    7F                                                       00225643         
+ 00050C                              228 BUFF     DS    CL80                                                     00225742         
+ 00055C 5C                           229          DC    C'*'                                                     00225842         
+ 00055D 60                           230 LINE     DC    C'-'                                                     00225942         
+ 00055E E388854095A49482             231          DC    CL26'The number of multiples of'                         00226044         
+ 000578                              232 NUM      DS    CL12                                                     00226142         
+ 000584 4089A27A                     233 TEMP     DC    CL4' is:'                                                00226244         
+ 000588                              234 MULTS    DS    CL12                                                     00226342         
+                                     235 **********************************************                          00226442         
+                                     236          END   MAIN                                                     00226500         
+0***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                      
+0*** DYNAMIC CORE AREA USED:  LOW:   13372 HIGH:    1256 LEAVING:  478940 FREE BYTES. AVERAGE:       61 BYTES/STMT ***            
+0*** ASSEMBLY TIME =    0.000 SECS,   237000 STATEMENTS/SEC ***                                                                   
+0*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                       
+1                              Table Contents                                                                                     
+0           2          -6         441          22       -1393         229                                                         
+0       -3784           5          91          62          25          -5                                                         
+0          57         545           3           6           3        9932                                                         
+0          -9          94        -434        8440          71          27                                                         
+0          53         683           1          19          -5       -2618                                                         
+0        2921           4        -193          -4        6491       -1936                                                         
+0          28         -58         -35           3         -76        4613                                                         
+0          -4           9           3        -499          20         786                                                         
+0        -464           8           9          80          -1         305                                                         
+0           6           6           7           6        5550       -3881                                                         
+0         660         -99          13        2926          15         492                                                         
+0          27        3926           6        6429        -123                                                                     
+1                                                                                                                                 
+-The number of multiples of          -1 is:          74                                                                           
+-The number of multiples of           6 is:          10                                                                           
+-The number of multiples of         -53 is:           1                                                                           
+-The number of multiples of           7 is:          10                                                                           
+-The number of multiples of           9 is:           7                                                                           
+-The number of multiples of          13 is:           4                                                                           
+-The number of multiples of         -10 is:           5                                                                           
+-The number of multiples of           4 is:          15                                                                           
+-The number of multiples of          29 is:           2                                                                           
+-The number of multiples of          -3 is:          25                                                                           
+-The number of multiples of          51 is:           0                                                                           
+-The number of multiples of         -17 is:           1                                                                           
+-The number of multiples of          73 is:           0                                                                           
+-The number of multiples of         -37 is:           1                                                                           
+-The number of multiples of          91 is:           1                                                                           
+-The number of multiples of          81 is:           0                                                                           
+-The number of multiples of         811 is:           0                                                                           
+0*** EXECUTION TIME =    0.005 SECS.     14732 INSTRUCTIONS EXECUTED -  2946400 INSTRUCTIONS/SEC ***                              
+0*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                

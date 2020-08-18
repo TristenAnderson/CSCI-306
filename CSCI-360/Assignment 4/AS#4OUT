@@ -1,0 +1,254 @@
+1                   J E S 2  J O B  L O G  --  S Y S T E M  2 9 6 4  --  N O D E  S V S C J E S 2        
+0 
+ 22.10.05 JOB02665 ---- SATURDAY,  29 FEB 2020 ----
+ 22.10.05 JOB02665  IRR010I  USERID KC03C96  IS ASSIGNED TO THIS JOB.
+ 22.10.05 JOB02665  ICH70001I KC03C96  LAST ACCESS AT 22:02:19 ON SATURDAY, FEBRUARY 29, 2020
+ 22.10.05 JOB02665  $HASP373 KC03C96A STARTED - INIT 2    - CLASS A        - SYS 2964
+ 22.10.05 JOB02665  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS-
+ 22.10.05 JOB02665  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SW
+ 22.10.05 JOB02665  -STEP1                00     59      5       .00       .00     .0             8  BATCH        0     0     0   
+ 22.10.05 JOB02665  -KC03C96A ENDED.  NAME-Tristen Anderson     TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+ 22.10.05 JOB02665  $HASP395 KC03C96A ENDED - RC=0000
+0------ JES2 JOB STATISTICS ------
+-  29 FEB 2020 JOB EXECUTION DATE
+-          173 CARDS READ
+-          258 SYSOUT PRINT RECORDS
+-            0 SYSOUT PUNCH RECORDS
+-           30 SYSOUT SPOOL KBYTES
+-         0.00 MINUTES EXECUTION TIME
+         1 //KC03C96A JOB ,'Tristen Anderson',MSGCLASS=H                           JOB02665
+         2 //STEP1 EXEC PGM=ASSIST                                                 00020000
+         3 //STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                        00030000
+         4 //SYSPRINT DD SYSOUT=*                                                  00040000
+         5 //SYSIN DD *                                                            00050000
+         6 //FT05F001  DD  DSN=KC02314.SPRING20.CSCI360.HW4DATA,DISP=SHR           00120000
+ ICH70001I KC03C96  LAST ACCESS AT 22:02:19 ON SATURDAY, FEBRUARY 29, 2020
+ IEFA111I KC03C96A IS USING THE FOLLOWING JOB RELATED SETTINGS:
+          SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+ IEF236I ALLOC. FOR KC03C96A STEP1
+ IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+ IEF237I JES2 ALLOCATED TO SYSPRINT
+ IEF237I JES2 ALLOCATED TO SYSIN
+ IGD103I SMS ALLOCATED TO DDNAME FT05F001
+ IEF142I KC03C96A STEP1 - STEP WAS EXECUTED - COND CODE 0000
+ IGD104I KC02293.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+ IEF285I   KC03C96.KC03C96A.JOB02665.D0000102.?         SYSOUT        
+ IEF285I   KC03C96.KC03C96A.JOB02665.D0000101.?         SYSIN         
+ IGD104I KC02314.SPRING20.CSCI360.HW4DATA             RETAINED,  DDNAME=FT05F001
+ IEF373I STEP/STEP1   /START 2020060.2210
+ IEF032I STEP/STEP1   /STOP  2020060.2210 
+         CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+         VIRT:   584K  SYS:   248K  EXT:        0K  SYS:    13540K
+         ATB- REAL:                  4116K  SLOTS:                     0K
+              VIRT- ALLOC:      11M SHRD:       0M
+ IEF375I  JOB/KC03C96A/START 2020060.2210
+ IEF033I  JOB/KC03C96A/STOP  2020060.2210 
+         CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+1*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT         
+0                                                                                                                                 
+0                                                                                                               PAGE    1         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                       1 ********************************************                            00060000         
+                                       2 *                                                                       00070000         
+                                       3 *  Program: ASSIGN4                                                     00080000         
+                                       4 *  Programmer: Tristen Anderson                                         00081000         
+                                       5 *                                                                       00082000         
+                                       6 *  Register Usage:                                                      00083000         
+                                       7 *                                                                       00084000         
+                                       8 *    15   BASE                                                          00085000         
+                                       9 *    11   Branch and Link                                               00086000         
+                                      10 *    12   Store PARMS                                                   00087043         
+                                      11 *    14   End of program                                                00088043         
+                                      12 *                                                                       00090000         
+                                      13 ********************************************                            00100000         
+ 000000                               14 MAIN     CSECT                                                          00101000         
+ 000000                               15          USING MAIN,15                                                  00102000         
+1       Tristen Anderson, CSCI 360, Program 4                                                                   PAGE    2         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 000000 41C0 F154            00154    17          LA    12,TABLE     Load addr of TABLE to R12                   00102304         
+ 000004 50C0 F2CC            002CC    18          ST    12,PARMS     Store TABLE addr in PARMS                   00102404         
+ 000008 41C0 F244            00244    19          LA    12,EOT       Load addr of EOT to R12                     00102504         
+ 00000C 50C0 F2D0            002D0    20          ST    12,PARMS+4   Store EOT in PARMS                          00102604         
+ 000010 41C0 F244            00244    21          LA    12,ENDTABLE  Load table end to R12                       00102741         
+ 000014 50C0 F2D4            002D4    22          ST    12,PARMS+8   Store end table in PARMS                    00102804         
+ 000018 41C0 F2CC            002CC    23          LA    12,PARMS     Load addr of PARMS to R12                   00102904         
+ 00001C 45B0 F030            00030    24          BAL   11,BUILD     Build the table                             00103000         
+ 000020 45B0 F06A            0006A    25          BAL   11,PRINT     Print all nums                              00103100         
+ 000024 45B0 F0D2            000D2    26          BAL   11,PRINTE    Print only even nums                        00103200         
+ 000028 07FE                          27          BR    14           End of program                              00103400         
+                                      28          LTORG              Literals go here                            00103500         
+                                      29 *****************************                                           00103600         
+                                      30 *                                                                       00103700         
+                                      31 *  Register Usage:                                                      00103800         
+                                      32 *    1        XDECI                                                     00103900         
+                                      33 *    2        hold a num                                                00104077         
+                                      34 *    3        table ptr                                                 00104177         
+                                      35 *    4        EOT                                                       00104277         
+                                      36 *    5        table len                                                 00104377         
+                                      37 *    6        counter                                                   00104477         
+                                      38 *   11        return address                                            00104577         
+                                      39 *                                                                       00104600         
+                                      40 *****************************                                           00104700         
+ 000030                               41 BUILD    DS    0H              Start BUILD                              00104805         
+ 000030 1B66                          42          SR    6,6             Clear out R6 for counter                 00104905         
+ 000032 9835 C000            00000    43          LM    3,5,0(12)       Load PARMS to R3, R4 and R5              00105055         
+ 000036 E000 F32D 0050 0032D          44 BLOOP    XREAD BUFFER,80       read a line                              00105105         
+ 00003C 4740 F064            00064    45          BC    B'0100',BLEND   check if failed                          00105205         
+ 000040 4110 F32D            0032D    46          LA    1,BUFFER        Load addr of BUFFER to R1                00105305         
+ 000044 5320 1000            00000    47 BLOOPIN  XDECI 2,0(0,1)        read a num from line                     00105405         
+ 000048 4710 F036            00036    48          BC    B'0001',BLOOP   return to top when end of line           00105505         
+ 00004C 5A60 F380            00380    49          A     6,=F'1'         Add one to count                         00105605         
+ 000050 5020 3000            00000    50          ST    2,0(0,3)        store the num in table                   00105705         
+ 000054 4130 3004            00004    51          LA    3,4(0,3)        advance the table ptr                    00105805         
+ 000058 5960 F384            00384    52          C     6,=F'60'                                                 00105937         
+ 00005C 4780 F064            00064    53          BE    BLEND                                                    00106037         
+ 000060 47F0 F044            00044    54          BC    B'1111',BLOOPIN return to top of inner loop              00106105         
+ 000064                               55 BLEND    DS    0H              loop end                                 00106205         
+ 000064 5030 F244            00244    56          ST    3,EOT           store addr of first unused entry         00106340         
+ 000068 07FB                          57          BR    11                                                       00106400         
+                                      58 *****************************                                           00106500         
+                                      59 *                                                                       00106600         
+                                      60 * Register usage:                                                       00106700         
+                                      61 *                                                                       00106816         
+                                      62 *   2        Addr of print line                                         00106958         
+                                      63 *   3        Addr of TABLE                                              00107016         
+                                      64 *   4        addr of EOT                                                00107116         
+                                      65 *   5        Table Len                                                  00107216         
+                                      66 *   6        Num from Table                                             00107323         
+                                      67 *   7        Counter                                                    00107423         
+                                      68 *  11        Return Address                                             00107557         
+                                      69 *                                                                       00107600         
+                                      70 *****************************                                           00107700         
+                                      71 *                                                                       00107800         
+ 00006A                               72 PRINT    DS    0H                                                       00107900         
+ 00006A E020 F259 0035 00259          73          XPRNT THEAD,53         Print header                            00108075         
+1       Tristen Anderson, CSCI 360, Program 4                                                                   PAGE    3         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 000070 E020 F2CA 0001 002CA          74          XPRNT SPACE,1                                                  00108159         
+ 000076 9835 C000            00000    75          LM    3,5,0(12)        Load params into R3 through R5          00108257         
+ 00007A 5840 F244            00244    76          L     4,EOT            Load address of end of table to R4      00108357         
+ 00007E 4120 F2D9            002D9    77 PLOOPO   LA    2,PLINE+1        Load addr of pline+1 to R2              00108457         
+ 000082 9240 F2D9      002D9          78          MVI   PLINE+1,C' '     Clear out print line                    00108557         
+ 000086 D252 F2DA F2D9 002DA 002D9    79          MVC   PLINE+2(83),PLINE+1   destructive overlap                00108657         
+ 00008C 1B77                          80          SR    7,7              clear out R7 for line width count       00108757         
+ 00008E 1934                          81          CR    3,4              check if at end of table                00108857         
+ 000090 47A0 F0CA            000CA    82          BC    B'1010',PEND     if at end of table print line and end   00108957         
+ 000094 5970 F388            00388    83 PLOOP    C     7,=F'7'          check if width is 7, start newline      00109057         
+ 000098 4780 F0C0            000C0    84          BE    PEND2            if 7 make a new line                    00109157         
+ 00009C 5860 3000            00000    85          L     6,0(0,3)         Load a number to R6 from table          00109457         
+ 0000A0 5260 F2BE            002BE    86          XDECO 6,NUMB           Format number in base 10                00109557         
+ 0000A4 D20B 2000 F2BE 00000 002BE    87          MVC   0(12,2),NUMB     add a num to the pline                  00109657         
+ 0000AA 4120 200C            0000C    88          LA    2,12(0,2)        advance pline by 12                     00109757         
+ 0000AE 4130 3004            00004    89          LA    3,4(0,3)         advance table ptr by 4                  00109857         
+ 0000B2 5A70 F380            00380    90          A     7,=F'1'          add one to width counter                00109957         
+ 0000B6 1934                          91          CR    3,4              check if at the end of table            00110057         
+ 0000B8 47A0 F0CA            000CA    92          BC    B'1010',PEND     if at end then print line and end       00110157         
+ 0000BC 47F0 F094            00094    93          B     PLOOP            else return to top of loop              00110357         
+ 0000C0 E020 F2D8 0055 002D8          94 PEND2    XPRNT PLINE,85         print the line                          00110457         
+ 0000C6 47F0 F07E            0007E    95          B     PLOOPO           return to top to clear line             00110557         
+ 0000CA E020 F2D8 0055 002D8          96 PEND     XPRNT PLINE,85         print the line                          00110657         
+ 0000D0 07FB                          97          BR    11               return to main                          00110757         
+                                      98 *                                                                       00110858         
+                                      99 *****************************                                           00110900         
+                                     100 *                                                                       00111000         
+                                     101 * Register usage:                                                       00111100         
+                                     102 *                                                                       00111258         
+                                     103 *   2        Address of print line                                      00111358         
+                                     104 *   3        Address of TABLE ptr                                       00111458         
+                                     105 *   4        address of EOT                                             00111558         
+                                     106 *   5        table length                                               00111658         
+                                     107 *   6        hold a num from table                                      00111758         
+                                     108 *   7        width counter                                              00111858         
+                                     109 *   8        remainder of even check                                    00111958         
+                                     110 *   9        temp reg to divide by 2                                    00112058         
+                                     111 *                                                                       00112158         
+                                     112 *****************************                                           00112200         
+ 0000D2                              113 PRINTE   DS    0H                                                       00112300         
+ 0000D2 E020 F2CA 0001 002CA         114          XPRNT SPACE,1       Print a blank line                         00112476         
+ 0000D8 E020 F28E 0030 0028E         115          XPRNT THEADE,48     Print the table header                     00112576         
+ 0000DE E020 F2CA 0001 002CA         116          XPRNT SPACE,1       Print a blank line                         00112676         
+ 0000E4 9835 C000            00000   117          LM    3,5,0(12)     load parms into R3 - R5                    00112776         
+ 0000E8 5840 F244            00244   118          L     4,EOT          Load EOT to R4                            00112876         
+ 0000EC 4120 F2D9            002D9   119 PELOOPO  LA    2,PLINE+1      Load PLINE+1 to R2                        00112976         
+ 0000F0 9240 F2D9      002D9         120          MVI   PLINE+1,C' '   Clear print line                          00113076         
+ 0000F4 D252 F2DA F2D9 002DA 002D9   121          MVC   PLINE+2(83),PLINE+1     destructive overlap              00113176         
+ 0000FA 1B77                         122          SR    7,7            clear width counter                       00113276         
+ 0000FC 1934                         123          CR    3,4            check if at end of table                  00113376         
+ 0000FE 47A0 F14A            0014A   124          BC    B'1010',PEEND  if at end branch to end                   00113476         
+ 000102 5970 F38C            0038C   125 PELOOP   C     7,=F'5'        check if at 5 items on line               00113576         
+ 000106 4780 F140            00140   126          BE    PEEND2         if yes then print line                    00113676         
+ 00010A 5860 3000            00000   127          L     6,0(0,3)       Load a num to R6 from table               00113776         
+ 00010E 1896                         128          LR    9,6            Load num to R9                            00113876         
+ 000110 5C80 F380            00380   129          M     8,=F'1'        Create 64 bit num                         00113976         
+ 000114 5D80 F390            00390   130          D     8,=F'2'        Divide by 2                               00114076         
+1       Tristen Anderson, CSCI 360, Program 4                                                                   PAGE    4         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 000118 5980 F394            00394   131          C     8,=F'0'        Check that remainder is 0 (even num)      00114176         
+ 00011C 4770 F132            00132   132          BNE   SKIP           If not even then skip                     00114276         
+ 000120 5260 F2BE            002BE   133          XDECO 6,NUMB         else print the number                     00114376         
+ 000124 5A70 F380            00380   134          A     7,=F'1'        increment width counter                   00114476         
+ 000128 D20B 2000 F2BE 00000 002BE   135          MVC   0(12,2),NUMB     add num to print line                   00114576         
+ 00012E 4120 200C            0000C   136          LA    2,12(0,2)        advance print line                      00114676         
+ 000132 4130 3004            00004   137 SKIP     LA    3,4(0,3)         advance table ptr                       00114776         
+ 000136 1934                         138          CR    3,4              check if at end table                   00114876         
+ 000138 47A0 F14A            0014A   139          BC    B'1010',PEEND    if at end then print and end            00114976         
+ 00013C 47F0 F102            00102   140          B     PELOOP           else return to top of loop              00115076         
+ 000140 E020 F2D8 003D 002D8         141 PEEND2   XPRNT PLINE,61         print a line                            00115176         
+ 000146 47F0 F0EC            000EC   142          B     PELOOPO          return to outer loop                    00115276         
+ 00014A E020 F2D8 003D 002D8         143 PEEND    XPRNT PLINE,61         print a line                            00115376         
+ 000150 07FB                         144          BR    11               return to main                          00115476         
+                                     145 *                                                                       00115500         
+ 000154                              146 TABLE    DS    60F'-256'    Table of nums                               00115604         
+ 000244                              147 ENDTABLE DS    0H           Mark table end                              00115739         
+ 000244                              148 EOT      DS    A(TABLE)     Address of 1st unused entry                 00115856         
+ 000248                              149 TABLELEN DS    F'0'                                                     00115950         
+                                     150 *                                                                       00116000         
+ 00024C 40                           151 TEST     DC    C' '                                                     00116131         
+ 00024D                              152          DS    CL12                                                     00116231         
+ 000259 F140404040404040             153 THEAD    DC    CL38'1'                                                  00116371         
+ 00027F D389A2A340968640             154          DC    CL15'List of Numbers'                                    00116461         
+ 00028E F140404040404040             155 THEADE   DC    CL28'1'                                                  00116571         
+ 0002AA D389A2A340968640             156          DC    CL20'List of Even Numbers'                               00116661         
+ 0002BE                              157 NUMB     DS    CL12' '                                                  00116708         
+ 0002CA 40                           158 SPACE    DC    C' '                                                     00116859         
+ 0002CC                              159 PARMS    DS    F'0'                                                     00116904         
+ 0002D0                              160          DS    F'0'                                                     00117007         
+ 0002D4                              161          DS    F'0'                                                     00117107         
+ 0002D8 F0                           162 PLINE    DC    C'0'                                                     00117207         
+ 0002D9                              163          DS    CL84' '                                                  00117327         
+ 00032D                              164 BUFFER   DS    80C                                                      00117602         
+ 00037D 5C                           165          DC    C'*'                                                     00117704         
+                                     166          END   MAIN                                                     00117800         
+ 000380 00000001                     167                =F'1'                                                                     
+ 000384 0000003C                     168                =F'60'                                                                    
+ 000388 00000007                     169                =F'7'                                                                     
+ 00038C 00000005                     170                =F'5'                                                                     
+ 000390 00000002                     171                =F'2'                                                                     
+ 000394 00000000                     172                =F'0'                                                                     
+0***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                      
+0*** DYNAMIC CORE AREA USED:  LOW:    9860 HIGH:     984 LEAVING:  482724 FREE BYTES. AVERAGE:       62 BYTES/STMT ***            
+0*** ASSEMBLY TIME =    0.000 SECS,   173000 STATEMENTS/SEC ***                                                                   
+0*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                       
+1                                     List of Numbers                                                                             
+                                                                                                                                  
+0      -18467        -169         -58        5705      -16827        2995        5436                                             
+0         902         382         718       11008       14989         485          23                                             
+0        9503           6          76           4           6      -26924          29                                             
+0          97        3290          17          13         355          74        -350                                             
+0        -724           7         -37          53       -8909          21          46                                             
+0          13         588          10          26       -1869       -6299          26                                             
+0         333      -15141         868         662         859        -529          35                                             
+0        -288       -8942       27446       -6729           6        3548         -84                                             
+0        -840      -13931       32439       -5537                                                                                 
+                                                                                                                                  
+1                           List of Even Numbers                                                                                  
+                                                                                                                                  
+0         -58        5436         902         382         718                                                                     
+0       11008           6          76           4           6                                                                     
+0      -26924        3290          74        -350        -724                                                                     
+0          46         588          10          26          26                                                                     
+0         868         662        -288       -8942       27446                                                                     
+0           6        3548         -84        -840                                                                                 
+0*** EXECUTION TIME =    0.001 SECS.      2246 INSTRUCTIONS EXECUTED -  2246000 INSTRUCTIONS/SEC ***                              
+0*** FIRST CARD NOT READ:        5     5     5     5    5                                                                         
+0*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                

@@ -1,0 +1,34 @@
+//KC03C96A JOB ,'Tristen Anderson',MSGCLASS=H                           00010000
+//STEP1 EXEC PGM=ASSIST                                                 00020000
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                        00030000
+//SYSPRINT DD SYSOUT=*                                                  00040000
+//SYSIN DD *                                                            00050000
+********************************************                            00060000
+* EXAMPLE PROGRAM                                                       00070003
+*                                                                       00080000
+* NAME: TRISTEN ANDERSON                                                00090000
+*                                                                       00100000
+* Register Usage                                                        00110000
+*                                                                       00120000
+* 15                                                                    00121002
+*  1     FIRST for addition                                             00130005
+*  2     SECOND for addition                                            00131005
+*  3     FIRST subtraction                                              00132005
+*  4     SECOND Subtraction                                             00133005
+*                                                                       00134002
+********************************************                            00140000
+MAIN     CSECT                                                          00150000
+         USING MAIN,15                                                  00160000
+         L     1,FIRST           Load FIRST to R1                       00161002
+         L     2,SECOND          Load SECOND to R2                      00162002
+         AR    1,2               Add R2 to R1 and store in R1           00170002
+         L     3,FIRST           Load FIRST into R3                     00171002
+         L     4,SECOND          Load SECOND into R4                    00172002
+         SR    4,3               Subtract SECOND(R4) from FIRST(R3)     00180002
+         XDUMP                   Dump registers                         00190002
+         BR    14                                                       00200000
+FIRST    DS    F'219'            Set FIRST = 219                        00201005
+SECOND   DS    F'83'             Set SECOND = 83                        00202005
+         END   MAIN                                                     00210001
+/*                                                                      00220000
+//                                                                      00230000

@@ -1,0 +1,81 @@
+
+<!-- saved from url=(0060)http://faculty.cs.niu.edu/~hutchins/csci360/homework/hw1.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>CSCI 360 Assignment 1</title>
+</head>
+
+<body data-gr-c-s-loaded="true">
+
+<center>
+<h2><b>
+<p>CSCI 360
+</p><p>Assignment 1
+</p></b><p><b>50 points
+</b></p></h2></center>
+
+<p>This assignment is in three parts:
+
+</p><p></p><hr>
+
+<p><b>Part A</b>
+
+</p><p>Write a program that does the following:
+
+</p><ul type="DISC">
+ <li>Declare a fullword FIRST with the value 219.
+ </li><li>Declare a fullword SECOND with the value 83.
+ </li><li>Add SECOND to FIRST.  To do this, simply load these numbers
+     into registers and use an AR.
+ </li><li>Subtract SECOND from FIRST.  To do this, load the two numbers into 
+     registers (a different pair of registers) and use an SR.
+ </li><li>Now use an XDUMP to dump out the registers and look at the
+     register values to see your results.
+</li></ul>
+
+<p></p><hr>
+
+<p><b>Part B</b>
+
+</p><p>Modify the program from Part A as follows:
+
+</p><ul>
+ <li>Declare two consecutive fullwords of storage called SUM and DIFF.
+ </li><li>Store (ST) the sum (FIRST plus SECOND) into SUM.
+ </li><li>Store (ST) the difference (FIRST minus SECOND) into DIFF.
+ </li><li>XDUMP that area of storage (containing SUM and DIFF) using XDUMP.  
+     You can use XDUMP to print the values in storage by using the label 
+     followed by the length of the field like this:  
+<pre>     XDUMP SUM,8</pre>
+ <p>or maybe as two lines:
+</p><pre>     XDUMP SUM,4 
+     XDUMP DIFF,4</pre>
+ </li><li>Look at the XDUMP output and verify your arithmetic is correct.
+</li></ul>
+
+<p></p><hr>
+
+<p><b>Part C</b>
+
+</p><p>Now rewrite your program using explicit addressing.  This
+   means on the L and ST, take out your labels and fill in the
+   addresses of the various fullwords.  You can get these addresses
+   from the program listing of part B (in a column at the left).
+
+</p><p></p><hr>
+
+<p><b>Other Notes</b>
+
+</p><p>Hint:  Start with the JCL and the trivial little program we had in 
+   the lab training exercise.  Take out the two SR lines and put in 
+   what you need.
+
+</p><p>Be sure your name and the assignment number (including Part A, B or C)
+   is included in the documentation for each file.
+
+</p><p>Turn in all three programs (from Parts A, B and C) and the output file
+   from Part C.
+
+
+
+
+</p></body></html>

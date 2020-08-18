@@ -1,0 +1,236 @@
+//KC03C96A JOB ,'Tristen Anderson',MSGCLASS=H                           00010000
+//STEP1 EXEC PGM=ASSIST                                                 00020000
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                        00030000
+//SYSPRINT DD SYSOUT=*                                                  00040000
+//SYSIN DD *                                                            00050000
+********************************************                            00060000
+*                                                                       00070000
+*  Program: ASSIGN5                                                     00080000
+*  Programmer: Tristen Anderson                                         00090000
+*                                                                       00100000
+*  Register Usage:                                                      00110000
+*                                                                       00120000
+*    15   Base                                                          00130001
+*    2    Parameter list                                                00131001
+*    11   Location when branched                                        00131126
+*    13   Main Save area                                                00131226
+*    14   Do not use this register                                      00140001
+*                                                                       00150000
+********************************************                            00160000
+MAIN     CSECT                                                          00170000
+         USING MAIN,15                                                  00180000
+         TITLE 'Tristen Anderson, CSCI 360, Program 5'                  00180130
+         EJECT                                                          00180230
+         SPACE                                                          00180330
+         ST    14,EXIT           Store the exit location                00180410
+         LA    13,MSAVE          Set the main save area                 00180509
+         LA    2,PARMS           Load parms list to R1                  00181030
+         L     11,=V(BUILD)      Get addr of BUILD                      00182028
+         BALR  14,11             Branch to BUILD                        00182132
+         LA    2,PARMS           Load PARMS                             00182232
+         L     11,=V(PRINT)      Ger addr of PRINT                      00182332
+         BALR  14,11             Branch to PRINT                        00182432
+         LA    2,PARMS           Load Parms                             00182552
+         L     11,=V(HOWMANY)    Get addr of HOWMANY                    00182652
+         BALR  14,11             Branch to HOWMANY                      00182752
+         L     14,EXIT           Load exit location                     00184010
+         BR    14                End of program                         00190030
+*********************************************************               00191030
+* MAIN VARIABLES GO HERE                                                00192030
+*********************************************************               00193030
+         LTORG                Literals go here                          00200024
+MSAVE    DS    18F                                                      00200130
+EXIT     DS    F                                                        00200230
+TABLE    DS    75F'-16'       Table of 75 Fullwords                     00201026
+ENDTABLE DS    0H             Marks the end of the table                00202024
+EOT      DC    A(TABLE)       Addres if 1rst unused entry               00203024
+PARMS    DC    A(TABLE)       Parameter List                            00203130
+         DC    A(ENDTABLE)                                              00203230
+         DC    A(EOT)                                                   00203330
+********************************************                            00204001
+*  BUILD SUB ROUTINE                                                    00204130
+*                                                                       00204230
+*  Register Usage                                                       00204326
+*                                                                       00204426
+*    1        XDECI                                                     00204526
+*    2        Holds a num from buffer                                   00204626
+*    3        Addr of table                                             00204726
+*    4        addr of table end                                         00204826
+*    5        EOT                                                       00204926
+*    12       Base                                                      00205026
+*    13       Save area                                                 00205126
+*    14       return addr                                               00205226
+*                                                                       00205326
+********************************************                            00205426
+BUILD    CSECT                                                          00205501
+* Standard Entry Linkage Here                                           00206001
+         STM   14,12,12(13)   Save all registers except 13              00207001
+         LR    12,15          Put addr of BUILD into R12                00208001
+         USING BUILD,11       Set R12 as the base reg for BUILD         00209028
+         LA    14,SAVEB       Load save area addrto R14                 00209101
+         ST    13,4(,14)      Save the forward ptr                      00209224
+         ST    14,8(,13)      Save the back ptr                         00209324
+         LR    13,14          Point R13 at BSAVE                        00209401
+*                                                                       00209511
+         LM    3,5,0(2)       Load parms into R3 through R5             00209631
+BLOOP    XREAD BUFFER,80      Read a line from the buffer               00209720
+         BC    B'0100',BLEND  If failed then end                        00209821
+         LA    1,BUFFER       Load buffer to R1                         00209920
+BLOOPIN  XDECI 6,0(0,1)       Read a num from the buffer                00210031
+         BC    B'0001',BLOOP     if line empty get a new one            00210121
+         C     6,=F'-123456789' Check if delimeter                      00210231
+         BE    BLEND             if delimeter then end                  00210320
+         ST    6,0(0,3)          add num to table                       00210431
+         LA    3,4(0,3)          advance table position                 00210523
+         BC    B'1111',BLOOPIN   return to inner loop                   00210820
+BLEND    DS    0H                end loop                               00210920
+         ST    3,0(0,5)          Store EOT                              00211034
+* Standard Exit Linkage                                                 00211101
+         L     13,4(,13)      Load calling routine save area to R13     00211201
+         LM    14,12,12(13)   Reloads calling rtns registers,not R13    00211601
+         BR    14             End Subroutine                            00211801
+         LTORG                Literals go here                          00211901
+BUFFER   DS    80C                                                      00212001
+         DC    C'*'                                                     00212101
+SAVEB    DS    18F'0'                                                   00212301
+**********************************                                      00212401
+*  PRINT SUBROUTINE                                                     00212533
+*                                                                       00212632
+*  Register Usage:                                                      00212733
+*                                                                       00212832
+*    1        Used by XDECI                                             00212933
+*    2        PARMS                                                     00213033
+*    3        Addres of table                                           00213133
+*    4        EOT                                                       00213233
+*    6        Hold a num from table                                     00213333
+*    7        Width Counter                                             00213433
+*   11        Address of main                                           00213533
+*   13        Main save                                                 00213633
+*   14        dont use                                                  00213733
+*   15        Base register                                             00213833
+*                                                                       00213932
+***********************************                                     00214032
+PRINT    CSECT                                                          00214132
+* Standard Entry Linkage                                                00214232
+         STM   14,12,12(13)                                             00214332
+         LR    12,15                                                    00214432
+         USING PRINT,11                                                 00214532
+         LA    14,PSAVE                                                 00214632
+         ST    13,4(,14)                                                00214732
+         ST    14,8(,13)                                                00214832
+         LR    13,14                                                    00214932
+*                                                                       00215032
+         LM    3,5,0(2)           Unload PARMS to R3 - R5               00215152
+         L     5,0(0,5)             Load EOT to R5                      00215252
+         XPRNT THEAD,45             Print table header                  00215752
+PLOOPO   LA    8,PLINE+1            Load addr of PLINE to R8            00215852
+         MVI   PLINE+1,C' '         clear out print line                00215952
+         MVC   PLINE+2(83),PLINE+1  destructive overlap                 00216052
+         SR    7,7                  Clear out width counter             00216152
+         CR    3,5                  Check if at table end               00216252
+         BC    B'1010',PEND         If at table end then print          00216352
+PLOOP    C     7,=F'6'              Check if width is 6                 00216452
+         BE    PEND2                If width is 6, then print line      00216552
+         L     6,0(0,3)             load a num from table to R6         00216652
+         XDECO 6,NUMB               format numb in base 10              00216752
+         MVC   0(12,8),NUMB         add num to print line               00216852
+         LA    8,12(0,8)            advance print line                  00216952
+         LA    3,4(0,3)             Advance table ptr                   00217052
+         A     7,=F'1'              Add one to width count              00217152
+         CR    3,5                  Check if at end of table            00217252
+         BC    B'1010',PEND         If at end of table, end             00217352
+         B     PLOOP            Return to inner loop                    00217452
+PEND2    XPRNT PLINE,73         Print a row from table                  00217552
+         B     PLOOPO           Return to outer loop                    00217652
+PEND     XPRNT PLINE,73         Print a row from the table              00217752
+         XPRNT BLANK,1          Print a blank line                      00217852
+* Standard Exit Linkage                                                 00217932
+         L     13,4(,13)                                                00218032
+         LM    14,12,12(13)                                             00218132
+         BR    14               Return to Main                          00218232
+         LTORG                                                          00218332
+PSAVE    DS    18F                                                      00218432
+NUMB     DS    CL12                                                     00218533
+PLINE    DC    C'0'                                                     00218633
+         DS    CL72                                                     00218733
+THEAD    DC    C'1'                                                     00218838
+         DC    CL30' '                                                  00218938
+         DC    CL14'Table Contents'                                     00219038
+BLANK    DC    C'1'                                                     00219151
+*************************************************                       00219232
+*  HOWMANY SUBROUTINE                                                   00219341
+*                                                                       00219441
+*  Register Usage:                                                      00219541
+*                                                                       00219641
+*    2        Holds PARMS                                               00219741
+*    3        Addr of Table                                             00219852
+*    4        Addr of table end                                         00219952
+*    5        EOT                                                       00220052
+*    6        Count for num mults                                       00220152
+*    8        Used in division                                          00220252
+*    9        Holds table entry                                         00220352
+*   10        Holds divisor from input file                             00220452
+*   11        base reg for HOWMANY                                      00220552
+*   13        Main save                                                 00220652
+*   14        Dont use                                                  00220752
+*   15        Base reg                                                  00220852
+*                                                                       00220941
+**************************************************                      00221041
+HOWMANY  CSECT                                                          00221141
+* Standard Entry Linkage                                                00221241
+         STM   14,12,12(13)                                             00221341
+         LR    12,15                                                    00221441
+         USING HOWMANY,11                                               00221541
+         LA    14,HSAVE                                                 00221641
+         ST    13,4(,14)                                                00221741
+         ST    14,8(,13)                                                00221841
+         LR    13,14                                                    00221941
+*                                                                       00222041
+         LM    3,5,0(2)         Unload PARMS                            00222141
+         L     0,0(0,5)         Load in EOT                             00222241
+*                                                                       00222342
+         SR    6,6              Clear the count register                00222448
+         STM   3,10,VARS        Save the registers                      00222543
+RESET    DS    0H                                                       00222643
+         LM    3,10,VARS        Restore the registers                   00222743
+READ     XREAD BUFF,80          Read a line from the file               00222843
+         BL    HEND             If fail the end                         00222943
+         LA    1,BUFF           Load buffer to R1                       00223043
+         XDECI 10,0(0,1)         Read num from buffer                   00223148
+         BO    READ             If failed grab a new line               00223248
+         XDECO 10,NUM            Format num in base 10                  00223348
+SEARCHT  CR    3,5              Check if at end of table                00223448
+         BC    B'1010',PTABLE   If at end of table print line           00223548
+         L     9,0(0,3)         Load a number from table to R9          00223652
+         M     8,=F'1'          Convert to 64 bit num                   00223752
+         DR    8,10             Divide R9 by R10                        00223852
+         LA    3,4(0,3)         Adavnce the table ptr                   00223952
+         CR    3,5              Check if at end of table                00224052
+         BC    B'1010',PTABLE   If at end of table print the line       00224152
+         C     8,=F'0'          Check if multiple of num                00224252
+         BNE   SEARCHT          If not then get a new num from table    00224352
+         A     6,=F'1'          If it is then add one to count          00224452
+         B     SEARCHT          Grab a new num from table               00224552
+PTABLE   DS    0H                                                       00224643
+         XDECO 6,MULTS          Format num mults in base 10             00224752
+         XPRNT LINE,55          Print the line                          00224852
+         B     RESET            Restart until file empty                00224952
+* Standard Exit Linkage                                                 00225041
+HEND     L     13,4(,13)                                                00225143
+         LM    14,12,12(13)                                             00225241
+         BR    14                                                       00225341
+         LTORG                                                          00225441
+HSAVE    DS    18F                                                      00225541
+VARS     DS    7F                                                       00225643
+BUFF     DS    CL80                                                     00225742
+         DC    C'*'                                                     00225842
+LINE     DC    C'-'                                                     00225942
+         DC    CL26'The number of multiples of'                         00226044
+NUM      DS    CL12                                                     00226142
+TEMP     DC    CL4' is:'                                                00226244
+MULTS    DS    CL12                                                     00226342
+**********************************************                          00226442
+         END   MAIN                                                     00226500
+/*                                                                      00227000
+//FT05F001  DD  DSN=KC02314.SPRING20.CSCI360.HW5DATA,DISP=SHR           00230000
+//                                                                      00240000

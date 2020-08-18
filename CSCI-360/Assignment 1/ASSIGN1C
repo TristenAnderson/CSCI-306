@@ -1,0 +1,36 @@
+//KC03C96A JOB ,'TRISTEN ANDERSON',MSGCLASS=H                           00010001
+//STEP1 EXEC PGM=ASSIST                                                 00020000
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                        00030000
+//SYSPRINT DD SYSOUT=*                                                  00040000
+//SYSIN DD *                                                            00050000
+********************************************                            00060000
+* ASSIGN1 PART C                                                        00070000
+*                                                                       00080000
+* NAME:  Tristen Anderson                                               00090000
+*                                                                       00100000
+* Register Usage                                                        00110000
+*                                                                       00120000
+* 15     BASE REGISTER                                                  00130000
+*                                                                       00140000
+*                                                                       00150000
+********************************************                            00160000
+MAIN     CSECT                                                          00170000
+         USING MAIN,15                                                  00180000
+         L     1,44(0,15)      Load R1 with first                       00181001
+         L     2,48(0,15)      Load R2 with second                      00182001
+         AR    1,2             Add R1+R2 store R1                       00183001
+         ST    1,52(0,15)      Store R1 in SUM                          00184001
+         L     3,44(0,15)      load First to R3                         00185001
+         L     4,48(0,15)      Load Second to R4                        00186001
+         SR    4,3             R3 - R4 store in R4                      00187001
+         ST    4,56(0,15)      Store R4 in DIFF                         00188001
+         XDUMP 52(,15),8       Dump Sum                                 00189001
+         XDUMP 56(,15),8       Dump Diff                                00189101
+         BR    14                                                       00190000
+FIRST    DS    F'219'       FRIST = 219                                 00200000
+SECOND   DS    F'83'        SECOND = 83                                 00210000
+SUM      DS    F            SUM = null                                  00220002
+DIFF     DS    F            DIFF = null                                 00230002
+         END MAIN                                                       00240000
+*/                                                                      00250000
+//                                                                      00260000

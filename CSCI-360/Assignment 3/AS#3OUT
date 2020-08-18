@@ -1,0 +1,241 @@
+1                   J E S 2  J O B  L O G  --  S Y S T E M  2 9 6 4  --  N O D E  S V S C J E S 2        
+0 
+ 17.53.06 JOB09179 ---- MONDAY,    17 FEB 2020 ----
+ 17.53.06 JOB09179  IRR010I  USERID KC03C96  IS ASSIGNED TO THIS JOB.
+ 17.53.06 JOB09179  ICH70001I KC03C96  LAST ACCESS AT 17:51:34 ON MONDAY, FEBRUARY 17, 2020
+ 17.53.06 JOB09179  $HASP373 KC03C96A STARTED - INIT 2    - CLASS A        - SYS 2964
+ 17.53.06 JOB09179  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS-
+ 17.53.06 JOB09179  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SW
+ 17.53.06 JOB09179  -STEP1                00     57      5       .00       .00     .0             9  BATCH        0     0     0   
+ 17.53.06 JOB09179  -KC03C96A ENDED.  NAME-Tristen Anderson     TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+ 17.53.06 JOB09179  $HASP395 KC03C96A ENDED - RC=0000
+0------ JES2 JOB STATISTICS ------
+-  17 FEB 2020 JOB EXECUTION DATE
+-          149 CARDS READ
+-          245 SYSOUT PRINT RECORDS
+-            0 SYSOUT PUNCH RECORDS
+-           29 SYSOUT SPOOL KBYTES
+-         0.00 MINUTES EXECUTION TIME
+         1 //KC03C96A JOB ,'Tristen Anderson',MSGCLASS=H                           JOB09179
+         2 //STEP1 EXEC PGM=ASSIST                                                 00020000
+         3 //STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                        00030000
+         4 //SYSPRINT DD SYSOUT=*                                                  00040000
+         5 //SYSIN DD *                                                            00050000
+         6 //FT05F001 DD DSN=KC02314.SPRING20.CSCI360.HW3DATA,DISP=SHR             00120000
+ ICH70001I KC03C96  LAST ACCESS AT 17:51:34 ON MONDAY, FEBRUARY 17, 2020
+ IEFA111I KC03C96A IS USING THE FOLLOWING JOB RELATED SETTINGS:
+          SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+ IEF236I ALLOC. FOR KC03C96A STEP1
+ IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+ IEF237I JES2 ALLOCATED TO SYSPRINT
+ IEF237I JES2 ALLOCATED TO SYSIN
+ IGD103I SMS ALLOCATED TO DDNAME FT05F001
+ IEF142I KC03C96A STEP1 - STEP WAS EXECUTED - COND CODE 0000
+ IGD104I KC02293.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+ IEF285I   KC03C96.KC03C96A.JOB09179.D0000102.?         SYSOUT        
+ IEF285I   KC03C96.KC03C96A.JOB09179.D0000101.?         SYSIN         
+ IGD104I KC02314.SPRING20.CSCI360.HW3DATA             RETAINED,  DDNAME=FT05F001
+ IEF373I STEP/STEP1   /START 2020048.1753
+ IEF032I STEP/STEP1   /STOP  2020048.1753 
+         CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+         VIRT:   584K  SYS:   248K  EXT:        0K  SYS:    13548K
+         ATB- REAL:                  4116K  SLOTS:                     0K
+              VIRT- ALLOC:      11M SHRD:       0M
+ IEF375I  JOB/KC03C96A/START 2020048.1753
+ IEF033I  JOB/KC03C96A/STOP  2020048.1753 
+         CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+1*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT         
+0                                                                                                                                 
+0                                                                                                               PAGE    1         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                       1 ********************************************                            00060000         
+                                       2 *                                                                       00070000         
+                                       3 *  Program: ASSIGN3                                                     00080000         
+                                       4 *  Programmer: Tristen Anderson                                         00081000         
+                                       5 *                                                                       00082000         
+                                       6 *  Register Usage:                                                      00083000         
+                                       7 *      15   BASE                                                        00084000         
+                                       8 *       2   PID                                                         00085030         
+                                       9 *       3   OID                                                         00086030         
+                                      10 *       4   MULTIPLY                                                    00086130         
+                                      11 *       5   NUMORD                                                      00087030         
+                                      12 *       6   PRICE                                                       00088030         
+                                      13 *       7   NUM ORDERS                                                  00089030         
+                                      14 *       8   DISCOUNT                                                    00089130         
+                                      15 *       9   SHIPPING                                                    00089230         
+                                      16 *      10   SUM                                                         00089330         
+                                      17 *      11   COUNT OF READS                                              00089430         
+                                      18 *      12   NUM OF FREE SHIPPING                                        00089530         
+                                      19 *      13   AVERAGE                                                     00089630         
+                                      20 *                                                                       00090000         
+                                      21 ********************************************                            00100000         
+ 000000                               22 MAIN     CSECT                                                          00101000         
+ 000000                               23          USING MAIN,15                                                  00102000         
+1       Tristen Anderson, CSCI 360, Program 3                                                                   PAGE    2         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+ 000000 1B55                          27          SR    5,5              CLEAR MULT REG                          00102411         
+ 000002 1B88                          28          SR    8,8              CLEAR DISCOUNT REG                      00102511         
+ 000004 1B99                          29          SR    9,9              CLEAR REG FOR SHIPPING                  00102611         
+ 000006 1BAA                          30          SR    10,10            CLEAR REG 10 FOR SUM                    00102724         
+ 000008 1BBB                          31          SR    11,11            CLEAR FOR COUNTER                       00102821         
+ 00000A 1BCC                          32          SR    12,12            CLEAR FOR NUM FREE SHIP                 00102921         
+ 00000C E020 F114 0078 00114          33          XPRNT TOP,120          PRINT THE TITLE                         00103053         
+ 000012 E020 F18D 007A 0018D          34          XPRNT HEAD,122         PRINT THE COLUMN HEADERS                00103152         
+ 000018 E000 F319 0050 00319          35 LOOP     XREAD BUFFER,80        READ A LINE STDIN                       00103212         
+ 00001E 4740 F0A8            000A8    36          BC    B'0100',ENDLOOP  IF READ FAILS THEN ENDLOOP              00103317         
+ 000022 5AB0 F0F0            000F0    37          A     11,=F'1'         ADD ONE TO COUNT                        00103421         
+ 000026 5880 F0F4            000F4    38          L     8,=F'0'          RESET DISCOUNT                          00103519         
+ 00002A 5890 F0F4            000F4    39          L     9,=F'0'          RESET SHIPPING                          00103619         
+ 00002E 5320 F319            00319    40          XDECI 2,BUFFER         READ PID FROM BUFFER                    00103702         
+ 000032 5331 0000            00000    41          XDECI 3,0(1)           READ OID FROM BUFFER                    00103802         
+ 000036 5351 0000            00000    42          XDECI 5,0(1)           READ NUMORD FROM BUFFER                 00103907         
+ 00003A 5361 0000            00000    43          XDECI 6,0(1)           READ PRICE FROM BUFFER                  00104007         
+ 00003E 1875                          44          LR    7,5              DUPLICATE NUMORD TO R7                  00104211         
+ 000040 1C46                          45          MR    4,6              CALCULATE PRETOT, PUT R5                00104311         
+ 000042 5950 F0F8            000F8    46          C     5,=F'18000'      COMPARE PRETOT TO 18000                 00104411         
+ 000046 4750 F04E            0004E    47          BC    B'0101',DISCNO   IF PRETOT LESS THAN,THEN SKIP ADD       00104514         
+ 00004A 5A80 F0FC            000FC    48          A     8,=F'600'        ADD 600 TO DISCOUNT                     00104614         
+ 00004E 5920 F100            00100    49 DISCNO   C     2,=F'566824'     CHECK PID,APPLY DISC IF TRUE            00104714         
+ 000052 4770 F05A            0005A    50          BC    B'0111',NOPE     IF PID IS NOT, THEN SKIP ADD            00104815         
+ 000056 5A80 F104            00104    51          A     8,=F'1000'       ADD 1000 TO DISC IF PID IS              00104921         
+ 00005A 5920 F108            00108    52 NOPE     C     2,=F'731128'     CHECK PID FOR RIGHT ID                  00105021         
+ 00005E 4770 F066            00066    53          BC    B'0111',BOGO     IF PID WRONG THEN SKIP ADD              00105121         
+ 000062 5A70 F0F0            000F0    54          A     7,=F'1'          ADD ONE TO NUMORD                       00105221         
+ 000066 5950 F10C            0010C    55 BOGO     C     5,=F'6000'       COMPARE PRETOT TO 6000                  00105321         
+ 00006A 47A0 F076            00076    56          BC    B'1010',FSHIP    ELSE REGULAR SHIPPING                   00105427         
+ 00006E 5A90 F110            00110    57          A     9,=F'400'        ADD 400 TO SHIPPING                     00105516         
+ 000072 5BC0 F0F0            000F0    58          S     12,=F'1'         TAKE ONE OFF THE FREE SHIP CNT          00105621         
+ 000076 5AC0 F0F0            000F0    59 FSHIP    A     12,=F'1'         ADD ONE TO THE FREE SHIP CNT            00105721         
+ 00007A 18D5                          60          LR    13,5             PUT PRETOT IN TOTAL REG                 00105826         
+ 00007C 1AD9                          61          AR    13,9             ADD SHIPPING TO TOTAL                   00105927         
+ 00007E 1BD8                          62          SR    13,8             SUBTRACT DISCOUNT FROM TOTAL            00106027         
+ 000080 1AAD                          63          AR    10,13            ADD THE TOTAL TO SUM                    00106142         
+ 000082 5230 F20B            0020B    64          XDECO 3,OID            FORMAT OID TO PRINT                     00106221         
+ 000086 5220 F21C            0021C    65          XDECO 2,PID            FORMAT PID TO PRINT                     00106302         
+ 00008A 5270 F23E            0023E    66          XDECO 7,NUMORD         FORMAT NUMORD                           00106411         
+ 00008E 5260 F22D            0022D    67          XDECO 6,PRICE          FORMAT PRICE                            00106506         
+ 000092 5290 F260            00260    68          XDECO 9,SHIPPING       FORMAT SHIPPING                         00106611         
+ 000096 5280 F24F            0024F    69          XDECO 8,DISCOUNT       FORMAT DISCOUNT                         00106711         
+ 00009A 52D0 F271            00271    70          XDECO 13,TOTAL         FORMAT TOTAL                            00106826         
+ 00009E E020 F205 0078 00205          71          XPRNT LINE,120         PRINT A LINE                            00106945         
+ 0000A4 47F0 F018            00018    72          BC    B'1111',LOOP     RETURN TO LOOP TOP                      00107018         
+ 0000A8                               73 ENDLOOP  DS    0H               END OF LOOP                             00107118         
+ 0000A8 52B0 F298            00298    74          XDECO 11,TOTNUM        FORMAT NUM SALES                        00107252         
+ 0000AC E020 F27D 0027 0027D          75          XPRNT NLINE,39         PRINT NUM SALES                         00107352         
+ 0000B2 52C0 F2BF            002BF    76          XDECO 12,FTOT          FORMAT NUM FREE SHIP                    00107452         
+ 0000B6 E020 F2A4 0027 002A4          77          XPRNT SLINE,39         PRINT NUM FREE SHIP                     00107552         
+ 0000BC 52A0 F2E6            002E6    78          XDECO 10,SUM           FORMAT SUM OF SALES                     00107652         
+ 0000C0 E020 F2CB 0027 002CB          79          XPRNT SUMLINE,39       PRINT SUM OF SALES                      00107752         
+ 0000C6 1B55                          80          SR    5,5              CLEAR OUT R5                            00107852         
+1       Tristen Anderson, CSCI 360, Program 3                                                                   PAGE    3         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 0000C8 1B44                          81          SR    4,4                 " "    R4                            00107952         
+ 0000CA 1B66                          82          SR    6,6                 " "    R6                            00108052         
+ 0000CC 185A                          83          LR    5,10            LOAD SUM INTO R5                         00108148         
+ 0000CE 186B                          84          LR    6,11            LOAD NUM LINES INTO R6                   00108248         
+ 0000D0 5C40 F0F0            000F0    85          M     4,=F'1'         CONVERT R4/5 to 64 bit                   00108348         
+ 0000D4 1D46                          86          DR    4,6             DIVIDE THE SUM BY NUM LINES              00108448         
+ 0000D6 1A44                          87          AR    4,4             DOUBLE THE REMAINDER                     00108548         
+ 0000D8 194B                          88          CR    4,11            COMPARE 2xR with DIVISOR                 00108649         
+ 0000DA 4750 F0E2            000E2    89          BC    B'0101',ADD     IF LESS THAN, DONT ADD                   00108748         
+ 0000DE 5A50 F0F0            000F0    90          A     5,=F'1'         IF NOT THEN ROUND UP 1                   00108848         
+ 0000E2 5250 F30D            0030D    91 ADD      XDECO 5,AVG           FORMAT THE AVG                           00108948         
+ 0000E6 E020 F2F2 0027 002F2          92          XPRNT AVGLINE,39      PRINT THE AVG                            00109051         
+ 0000EC 07FE                          93          BR    14                                                       00109100         
+                                      94          LTORG                 LITERALS GO HERE                         00109248         
+ 0000F0 00000001                      95                =F'1'                                                                     
+ 0000F4 00000000                      96                =F'0'                                                                     
+ 0000F8 00004650                      97                =F'18000'                                                                 
+ 0000FC 00000258                      98                =F'600'                                                                   
+ 000100 0008A628                      99                =F'566824'                                                                
+ 000104 000003E8                     100                =F'1000'                                                                  
+ 000108 000B27F8                     101                =F'731128'                                                                
+ 00010C 00001770                     102                =F'6000'                                                                  
+ 000110 00000190                     103                =F'400'                                                                   
+ 000114 F1                           104 TOP      DC    C'1'                                                     00109341         
+ 000115 4040404040404040             105          DC    CL45' '                                                  00109453         
+ 000142 E2C1D3C5E240D9C5             106          DC    CL30'SALES REPORT -- Get-It-From-Us'                     00109530         
+ 000160 4040404040404040             107          DC    CL45' '                                                  00109653         
+ 00018D F0                           108 HEAD     DC    C'0'                                                     00109741         
+ 00018E 4040404040404040             109          DC    CL8' '                                                   00109852         
+ 000196 D6D9C4C5D940C9C4             110          DC    CL8'ORDER ID'                                            00109930         
+ 00019E 4040404040404040             111          DC    CL8' '                                                   00110045         
+ 0001A6 D7D9D6C4E4C3E340             112          DC    CL10'PRODUCT ID'                                         00110130         
+ 0001B0 4040404040404040             113          DC    CL8' '                                                   00110245         
+ 0001B8 D7D9C9C3C540C5C1             114          DC    CL10'PRICE EACH'                                         00110330         
+ 0001C2 4040404040404040             115          DC    CL8' '                                                   00110445         
+ 0001CA D5E4D4C2C5D940D6             116          DC    CL14'NUMBER ORDERED'                                     00110530         
+ 0001D8 4040404040404040             117          DC    CL8' '                                                   00110645         
+ 0001E0 C4C9E2C3D6E4D5E3             118          DC    CL8'DISCOUNT'                                            00110730         
+ 0001E8 4040404040404040             119          DC    CL8' '                                                   00110845         
+ 0001F0 E2C8C9D7D7C9D5C7             120          DC    CL8'SHIPPING'                                            00110930         
+ 0001F8 4040404040404040             121          DC    CL8' '                                                   00111045         
+ 000200 E3D6E3C1D3                   122          DC    CL5'TOTAL'                                               00111130         
+ 000205 F0                           123 LINE     DC    C'0'                                                     00111241         
+ 000206 4040404040                   124          DC    CL5' '                                                   00111301         
+ 00020B                              125 OID      DS    CL12                                                     00111444         
+ 000217 4040404040                   126          DC    CL5' '                                                   00111501         
+ 00021C                              127 PID      DS    CL12                                                     00111644         
+ 000228 4040404040                   128          DC    CL5' '                                                   00111701         
+ 00022D                              129 PRICE    DS    CL12                                                     00111844         
+ 000239 4040404040                   130          DC    CL5' '                                                   00111901         
+ 00023E                              131 NUMORD   DS    CL12                                                     00112044         
+ 00024A 4040404040                   132          DC    CL5' '                                                   00112101         
+ 00024F                              133 DISCOUNT DS    CL12                                                     00112244         
+ 00025B 4040404040                   134          DC    CL5' '                                                   00112301         
+ 000260                              135 SHIPPING DS    CL12                                                     00112444         
+ 00026C 4040404040                   136          DC    CL5' '                                                   00112501         
+ 000271                              137 TOTAL    DS    CL12                                                     00112644         
+1       Tristen Anderson, CSCI 360, Program 3                                                                   PAGE    4         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 00027D 60                           138 NLINE    DC    C'-'                                                     00112739         
+ 00027E E3D6E3C1D340D5E4             139          DC    CL26'TOTAL NUMBER OF SALES:    '                         00112850         
+ 000298                              140 TOTNUM   DS    CL12                                                     00112943         
+ 0002A4 F0                           141 SLINE    DC    C'0'                                                     00113039         
+ 0002A5 D5E4D4C2C5D940E6             142          DC    CL26'NUMBER WITH FREE SHIPPING:'                         00113139         
+ 0002BF                              143 FTOT     DS    CL12                                                     00113243         
+ 0002CB F0                           144 SUMLINE  DC    C'0'                                                     00113339         
+ 0002CC E2E4D440D6C640C1             145          DC    CL26'SUM OF ALL SALES:         '                         00113450         
+ 0002E6                              146 SUM      DS    CL12                                                     00113543         
+ 0002F2 F0                           147 AVGLINE  DC    C'0'                                                     00113639         
+ 0002F3 C1E5C5D9C1C7C540             148          DC    CL26'AVERAGE SALE TOTAL:       '                         00113750         
+ 00030D                              149 AVG      DS    CL12                                                     00113843         
+ 000319                              150 BUFFER   DS    0C                                                       00113901         
+                                     151          END   MAIN                                                     00114003         
+0***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                      
+0*** DYNAMIC CORE AREA USED:  LOW:    8440 HIGH:    1024 LEAVING:  484104 FREE BYTES. AVERAGE:       62 BYTES/STMT ***            
+0*** ASSEMBLY TIME =    0.000 SECS,   152000 STATEMENTS/SEC ***                                                                   
+0*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                       
+1                                             SALES REPORT -- Get-It-From-Us                                                      
+0        ORDER ID        PRODUCT ID        PRICE EACH        NUMBER ORDERED        DISCOUNT        SHIPPING        TOTAL         
+0          9975595           566824             3250                9             1600                0            27650          
+0          4806368           973754              150               47                0                0             7050          
+0          2179517           133160              700               16                0                0            11200          
+0          8556923           401286             1495               68              600                0           101060          
+0          8231746           783128             1995                3                0              400             6385          
+0          4446789           566824             3650               20             1600                0            71400          
+0          6729807           456882             1325               40              600                0            52400          
+0          6056932           719047               75              200                0                0            15000          
+0          6123148           978660              165                6                0              400             1390          
+0          6590474           554005             2050               22              600                0            44500          
+0          7288584           402455              645              121              600                0            77445          
+0          7696142           339322             1149                7                0                0             8043          
+0          8128736           777444             5000                1                0              400             5400          
+0          9098765           566824             3650               12             1600                0            42200          
+0          7623457           888555             4000                5              600                0            19400          
+0          5483499           777777             3333                3                0                0             9999          
+0          9470946           731128             2995                2                0              400             3395          
+0          1932746           734023              298               24                0                0             7152          
+0          8138096           558594              629                5                0              400             3545          
+0          1375318           587395             3410                2                0                0             6820          
+0          6696572           664940               39               84                0              400             3676          
+0          1012496           549265              229               42                0                0             9618          
+-TOTAL NUMBER OF SALES:              22                                                                                           
+0NUMBER WITH FREE SHIPPING:          16                                                                                           
+0SUM OF ALL SALES:               534728                                                                                           
+0AVERAGE SALE TOTAL:              24306                                                                                           
+0*** EXECUTION TIME =    0.000 SECS.       780 INSTRUCTIONS EXECUTED -   780000 INSTRUCTIONS/SEC ***                              
+0*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                

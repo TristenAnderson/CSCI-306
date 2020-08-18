@@ -1,0 +1,384 @@
+1                   J E S 2  J O B  L O G  --  S Y S T E M  2 9 6 4  --  N O D E  S V S C J E S 2        
+0 
+ 16.09.22 JOB04002 ---- SUNDAY,    05 APR 2020 ----
+ 16.09.22 JOB04002  IRR010I  USERID KC03C96  IS ASSIGNED TO THIS JOB.
+ 16.09.22 JOB04002  ICH70001I KC03C96  LAST ACCESS AT 16:01:24 ON SUNDAY, APRIL 5, 2020
+ 16.09.22 JOB04002  $HASP373 KC03C96F STARTED - INIT 2    - CLASS A        - SYS 2964
+ 16.09.22 JOB04002  $HASP395 KC03C96F ENDED - RC=0000
+0------ JES2 JOB STATISTICS ------
+-  05 APR 2020 JOB EXECUTION DATE
+-          288 CARDS READ
+-          388 SYSOUT PRINT RECORDS
+-            0 SYSOUT PUNCH RECORDS
+-           45 SYSOUT SPOOL KBYTES
+-         0.00 MINUTES EXECUTION TIME
+         1 //KC03C96F JOB ,'Tristen Anderson',MSGCLASS=H                           JOB04002
+         2 //STEP1 EXEC PGM=ASSIST                                                 00020000
+         3 //STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                        00030000
+         4 //SYSPRINT DD SYSOUT=*                                                  00040000
+         5 //SYSIN DD *                                                            00050000
+         6 //FT05F001  DD  DSN=KC02314.SPRING20.CSCI360.HW6DATA,DISP=SHR           00408000
+ ICH70001I KC03C96  LAST ACCESS AT 16:01:24 ON SUNDAY, APRIL 5, 2020
+ IEFA111I KC03C96F IS USING THE FOLLOWING JOB RELATED SETTINGS:
+          SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+ IEF236I ALLOC. FOR KC03C96F STEP1
+ IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+ IEF237I JES2 ALLOCATED TO SYSPRINT
+ IEF237I JES2 ALLOCATED TO SYSIN
+ IGD103I SMS ALLOCATED TO DDNAME FT05F001
+ IEF142I KC03C96F STEP1 - STEP WAS EXECUTED - COND CODE 0000
+ IGD104I KC02293.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+ IEF285I   KC03C96.KC03C96F.JOB04002.D0000102.?         SYSOUT        
+ IEF285I   KC03C96.KC03C96F.JOB04002.D0000101.?         SYSIN         
+ IGD104I KC02314.SPRING20.CSCI360.HW6DATA             RETAINED,  DDNAME=FT05F001
+ IEF373I STEP/STEP1   /START 2020096.1609
+ IEF032I STEP/STEP1   /STOP  2020096.1609 
+         CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+         VIRT:   584K  SYS:   252K  EXT:        0K  SYS:    13568K
+         ATB- REAL:                  4116K  SLOTS:                     0K
+              VIRT- ALLOC:      11M SHRD:       0M
+ IEF375I  JOB/KC03C96F/START 2020096.1609
+ IEF033I  JOB/KC03C96F/STOP  2020096.1609 
+         CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+1*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT         
+0                                                                                                                                 
+0                                                                                                               PAGE    1         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                       1 *********************************************                           00060000         
+                                       2 *                                                                       00070000         
+                                       3 *  Assignment 6                                                         00080000         
+                                       4 *                                                                       00090000         
+                                       5 * *******************************************                           00100000         
+ 000000                                6 ENTRY   DSECT                                                           00110000         
+ 000000                                7 DESCR   DS    30C                                                       00120000         
+ 00001E                                8 VALUE   DS    PL3                                                       00130000         
+                                       9 *********************************************                           00140000         
+                                      10 *                                                                       00150000         
+                                      11 * MAIN                                                                  00160000         
+                                      12 *                                                                       00170000         
+                                      13 * Register Usage:                                                       00180000         
+                                      14 *  15  Base                                                             00190000         
+                                      15 *  14  Exit                                                             00200000         
+                                      16 *   2  PARMS                                                            00201000         
+                                      17 *                                                                       00202000         
+                                      18 *********************************************                           00210000         
+ 000000                               19 MAIN    CSECT                                                           00220000         
+ 000000                               20         USING MAIN,15                                                   00230000         
+ 000000 50E0 F084            00084    21         ST    14,EXIT        Store address of end                       00240021         
+ 000004 41D0 F03C            0003C    22         LA    13,MSAVE       load address of main save                  00250021         
+ 000008 4120 F444            00444    23         LA    2,PARMS        load parms into R2                         00260021         
+ 00000C 58B0 F030            00030    24         L     11,=V(BUILD)   get address of build                       00270021         
+ 000010 05EB                          25         BALR  14,11          branch and link to build                   00280021         
+ 000012 4120 F444            00444    26         LA    2,PARMS                                                   00281016         
+ 000016 58B0 F034            00034    27         L     11,=V(PRINT)                                              00282016         
+ 00001A 05EB                          28         BALR  14,11                                                     00283016         
+ 00001C 4120 F444            00444    29         LA    2,PARMS                                                   00284019         
+ 000020 58B0 F038            00038    30         L     11,=V(STATS)                                              00285019         
+ 000024 05EB                          31         BALR  14,11                                                     00286019         
+ 000026 58E0 F084            00084    32         L     14,EXIT                                                   00290000         
+ 00002A 07FE                          33         BR    14                                                        00300000         
+                                      34 *********************************************                           00310000         
+                                      35 * MAIN VARIABLES                                                        00320000         
+                                      36 *********************************************                           00330000         
+                                      37         LTORG                                                           00340000         
+ 000030 00000450                      38                =V(BUILD)                                                                 
+ 000034 00000548                      39                =V(PRINT)                                                                 
+ 000038 000006B0                      40                =V(STATS)                                                                 
+ 00003C                               41 MSAVE   DS    18F                                                       00350000         
+ 000084                               42 EXIT    DS    F                                                         00360000         
+ 000088                               43 TABLE   DS    25CL38                                                    00361001         
+ 000440                               44 EOT     DS    F                                                         00362001         
+ 000444 00000088                      45 PARMS   DC    A(TABLE)                                                  00363002         
+ 000448 00000440                      46         DC    A(EOT)                                                    00364001         
+                                      47 *********************************************                           00370000         
+                                      48 * BUILD                                                                 00371000         
+                                      49 *                                                                       00372000         
+                                      50 * Register Usage:                                                       00372115         
+                                      51 *   1  Stores the buffer                                                00372215         
+                                      52 *   2  Holds parameters                                                 00372315         
+1                                                                                                               PAGE    2         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                      53 *   3  Address of table                                                 00372415         
+                                      54 *   4  Address of end of table                                          00372515         
+                                      55 *  12  base                                                             00372615         
+                                      56 *  13  Save area                                                        00372715         
+                                      57 *  14  return address                                                   00372815         
+                                      58 *********************************************                           00373000         
+ 000450                               59 BUILD   CSECT                                                           00374000         
+ 000450 90EC D00C            0000C    60         STM   14,12,12(13)   Save all registers except 13               00375000         
+ 000454 18CF                          61         LR    12,15          Put addr of BUILD into R12                 00376000         
+ 000450                               62         USING BUILD,11       Set R12 as the base reg for BUILD          00377000         
+ 000000                               63         USING ENTRY,3                                                   00377103         
+ 000456 41E0 B058            004A8    64         LA    14,BSAVE       Load save area addrto R14                  00378002         
+ 00045A 50D0 E004            00004    65         ST    13,4(,14)      Save the forward ptr                       00379000         
+ 00045E 50E0 D008            00008    66         ST    14,8(,13)      Save the back ptr                          00379100         
+ 000462 18DE                          67         LR    13,14          Point R13 at BSAVE                         00379200         
+                                      68 *                                                                       00379300         
+ 000464 9834 2000            00000    69         LM    3,4,0(2)       Load PARMS into R3,R4                      00379403         
+ 000468 E000 B0A0 0050 004F0          70 LOAD    XREAD BUFFER,80      read a line from the input                 00379715         
+ 00046E 4740 B044            00494    71         BL    BEND           If end of file then end                    00379815         
+ 000472 4110 B0A0            004F0    72         LA    1,BUFFER       Load buffer to R1                          00379915         
+ 000476 D21D 3000 1000 00000 00000    73         MVC   DESCR(30),0(1) Load description from buffer               00380003         
+ 00047C 4110 1020            00020    74         LA    1,32(,1)       Advance buffer 32 spaces                   00380103         
+ 000480 D204 B0F1 1000 00541 00000    75         MVC   TEMP(5),0(1)   Save the value in a temp variable          00380209         
+ 000486 F224 301E B0F1 0001E 00541    76         PACK  VALUE(3),TEMP(5) Pack the value                           00380412         
+ 00048C 4130 3024            00024    77         LA    3,36(,3)       Add the entry to the table                 00381499         
+ 000490 47F0 B018            00468    78         B     LOAD           load a new line to buffer                  00381515         
+ 000494 5030 4000            00000    79 BEND    ST    3,0(,4)        Store the addr of last entry               00381619         
+                                      80 *                                                                       00381703         
+ 000498 58D0 D004            00004    81         L     13,4(,13)      Load calling routine save area to R13      00381819         
+ 00049C 98EC D00C            0000C    82         LM    14,12,12(13)   Reloads calling rtns registers,not R13     00381903         
+ 0004A0 07FE                          83         BR    14             End Subroutine                             00382003         
+                                      84 *********************************************                           00382103         
+                                      85 * BUILD VARIABLES                                                       00382203         
+                                      86 *********************************************                           00382303         
+                                      87         LTORG                                                           00382403         
+ 0004A8                               88 BSAVE   DS    18F                                                       00382503         
+ 0004F0                               89 BUFFER  DS    80C                                                       00382603         
+ 000540 5C                            90         DC    C'*'                                                      00382703         
+ 000541                               91 TEMP    DS    CL5                                                       00382833         
+                                      92 *********************************************                           00384015         
+                                      93 * PRINT                                                                 00385015         
+                                      94 *                                                                       00386015         
+                                      95 * Register Usage:                                                       00386115         
+                                      96 *   1  Used to append $                                                 00386299         
+                                      97 *   2  Parameter List                                                   00386399         
+                                      98 *   3  Address of table                                                 00386499         
+                                      99 *   4  Address of EOT                                                   00386599         
+                                     100 *  11  location when branched                                           00386699         
+                                     101 *  13  Save area                                                        00386799         
+                                     102 *  14  return to main                                                   00386899         
+                                     103 *  15  base                                                             00386999         
+                                     104 *********************************************                           00387015         
+ 000548                              105 PRINT    CSECT                                                          00388015         
+ 000548 90EC D00C            0000C   106          STM   14,12,12(13)                                             00389015         
+ 00054C 18CF                         107          LR    12,15                                                    00389115         
+ 000548                              108          USING PRINT,11                                                 00389215         
+ 00054E 41E0 B084            005CC   109          LA    14,PSAVE                                                 00389315         
+1                                                                                                               PAGE    3         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 000552 50D0 E004            00004   110          ST    13,4(,14)                                                00389415         
+ 000556 50E0 D008            00008   111          ST    14,8(,13)                                                00389515         
+ 00055A 18DE                         112          LR    13,14                                                    00389615         
+                                     113 *                                                                       00389715         
+ 000000                              114          USING ENTRY,3       Use ENTRY dsect                            00389899         
+ 00055C 9834 2000            00000   115          LM    3,4,0(2)      Unload the parameter list                  00389999         
+ 000560 5840 4000            00000   116          L     4,0(0,4)      Set R4 to EOT                              00390199         
+ 000564 E020 B0CC 002A 00614         117          XPRNT HEAD,42       Print the Header                           00390299         
+ 00056A E020 B0F6 0036 0063E         118          XPRNT HEAD2,54      Print the column labels                    00390399         
+ 000570 1934                         119 PLOOP    CR    3,4           Check if at EOT                            00390499         
+ 000572 47A0 B068            005B0   120          BC    B'1010',PEND    If EOT then end                          00390599         
+ 000576 D21D B132 3000 0067A 00000   121          MVC   PDESC(30),DESCR Move description to print line           00390699         
+ 00057C D206 B15A B07C 006A2 005C4   122          MVC   PVAL(7),=X'402021204B2020'   Format edit                 00390799         
+ 000582 4110 B15D            006A5   123          LA    1,PVAL+3                                                 00390853         
+ 000586 D201 B163 B078 006AB 005C0   124          MVC   NGTV(2),=CL2'  '   Reset negative indicator              00390999         
+ 00058C DF06 B15A 301E 006A2 0001E   125          EDMK  PVAL(7),VALUE      Transfer packed num to print line     00391099         
+ 000592 47A0 B054            0059C   126          BC    B'1010',YEET       If positive skip to yeet              00391199         
+ 000596 D201 B163 B07A 006AB 005C2   127          MVC   NGTV(2),=CL2'CR'   If negative, then indicate on print   00391299         
+ 00059C 0610                         128 YEET     BCTR  1,0                Add the dollar sign                   00391399         
+ 00059E 925B 1000      00000         129          MVI   0(1),C'$'                                                00391452         
+ 0005A2 E020 B12C 0039 00674         130          XPRNT PLINE,57      Print the line                             00391999         
+ 0005A8 4130 3024            00024   131          LA    3,36(,3)      Advance the table ptr                      00392099         
+ 0005AC 47F0 B028            00570   132          B     PLOOP         return to top of loop                      00392199         
+ 0005B0                              133 PEND     DS    0H            end print loop                             00392299         
+                                     134 *                                                                       00392315         
+ 0005B0 58D0 D004            00004   135          L     13,4(,13)     exit linkage                               00392499         
+ 0005B4 98EC D00C            0000C   136          LM    14,12,12(13)                                             00392515         
+ 0005B8 07FE                         137          BR    14            end print                                  00392699         
+                                     138 *********************************************                           00392715         
+                                     139 * PRINT VARIABELES                                                      00392815         
+                                     140 *********************************************                           00392915         
+                                     141          LTORG                                                          00393015         
+ 0005C0 4040                         142                =CL2'  '                                                                  
+ 0005C2 C3D9                         143                =CL2'CR'                                                                  
+ 0005C4 402021204B2020               144                =X'402021204B2020'                                                        
+ 0005CC                              145 PSAVE    DS    18F                                                      00393115         
+ 000614 F1                           146 HEAD     DC    C'1'                                                     00393222         
+ 000615 4040404040404040             147          DC    CL17' '                                                  00393325         
+ 000626 E2A4A28195A240C2             148          DC    CL24'Susans Business Ventures'                           00393423         
+ 00063E 60                           149 HEAD2    DC    C'-'                                                     00393522         
+ 00063F 4040404040                   150          DC    CL5' '                                                   00393624         
+ 000644 C485A283998997A3             151          DC    CL11'Description'                                        00393722         
+ 00064F 4040404040404040             152          DC    CL32' '                                                  00393822         
+ 00066F E58193A485                   153          DC    CL5'Value'                                               00393922         
+ 000674 F0                           154 PLINE    DC    C'0'                                                     00394028         
+ 000675 4040404040                   155          DC    CL5' '                                                   00394129         
+ 00067A                              156 PDESC    DS    CL30                                                     00394228         
+ 000698 4040404040404040             157          DC    CL10' '                                                  00394355         
+ 0006A2                              158 PVAL     DS    CL7                                                      00394433         
+ 0006A9 4040                         159          DC    CL2' '                                                   00394557         
+ 0006AB                              160 NGTV     DS    CL2                                                      00394657         
+                                     161 *********************************************                           00394716         
+                                     162 * STATS                                                                 00394816         
+                                     163 *                                                                       00394916         
+                                     164 * Register Usage:                                                       00395016         
+                                     165 *   15  Base                                                            00395199         
+                                     166 *    1  Used to append $                                                00395299         
+1                                                                                                               PAGE    4         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+                                     167 *    2  Parameter List                                                  00395399         
+                                     168 *    3  Address of table                                                00395499         
+                                     169 *    4  Address of EOT                                                  00395599         
+                                     170 *   11  Location when branched                                          00395699         
+                                     171 *   13  Save area                                                       00395799         
+                                     172 *   14  Return to main                                                  00395899         
+                                     173 *********************************************                           00395916         
+ 0006B0                              174 STATS    CSECT                                                          00396016         
+ 0006B0 90EC D00C            0000C   175          STM   14,12,12(13)                                             00396116         
+ 0006B4 18CF                         176          LR    12,15                                                    00396216         
+ 0006B0                              177          USING STATS,11                                                 00396316         
+ 0006B6 41E0 B154            00804   178          LA    14,SSAVE                                                 00396416         
+ 0006BA 50D0 E004            00004   179          ST    13,4(,14)                                                00396516         
+ 0006BE 50E0 D008            00008   180          ST    14,8(,13)                                                00396616         
+ 0006C2 18DE                         181          LR    13,14                                                    00396716         
+                                     182 *                                                                       00396816         
+ 0006C4 9834 2000            00000   183          LM    3,4,0(2)      Unload the parameters                      00396999         
+ 0006C8 5840 4000            00000   184          L     4,0(0,4)      Set R4 to EOT                              00397099         
+                                     185 *                                                                       00397182         
+ 0006CC E020 B19C 0030 0084C         186          XPRNT SHEAD,48      Print the header                           00397299         
+ 0006D2 F810 B336 B148 009E6 007F8   187          ZAP   PNUM,=PL1'0'  Initialize fields                          00397399         
+ 0006D8 F810 B338 B148 009E8 007F8   188          ZAP   PNUMP,=PL1'0'                                            00397490         
+ 0006DE F810 B33A B148 009EA 007F8   189          ZAP   PNUMN,=PL1'0'                                            00397590         
+ 0006E4 F820 B33C B148 009EC 007F8   190          ZAP   PMAX,=PL1'0'                                             00397699         
+ 0006EA F820 B33F B148 009EF 007F8   191          ZAP   PMIN,=PL1'0'                                             00397799         
+ 0006F0 F820 B342 B148 009F2 007F8   192          ZAP   PSUM,=PL1'0'                                             00397899         
+ 0006F6 F830 B345 B148 009F5 007F8   193          ZAP   PAVG,=PL1'0'                                             00397999         
+ 0006FC 1934                         194 COUNT    CR    3,4           Check if at EOT                            00398099         
+ 0006FE 47A0 B0B8            00768   195          BC    B'1010',CEND  If at EOT then end loop                    00398199         
+ 000702 FA10 B336 B149 009E6 007F9   196          AP    PNUM,=PL1'1'  Add one to count                           00398299         
+ 000708 FA22 B342 301E 009F2 0001E   197          AP    PSUM,VALUE    Add the value to sum                       00398399         
+ 00070E FA20 301E B148 0001E 007F8   198          AP    VALUE,=PL1'0' check if negative                          00398499         
+ 000714 4720 B07E            0072E   199          BC    B'0010',POS   if positive skip                           00398599         
+ 000718 FB10 B338 B149 009E8 007F9   200          SP    PNUMP,=PL1'1' remove one from pos count                  00398699         
+ 00071E FA20 301E B148 0001E 007F8   201          AP    VALUE,=PL1'0' check if strictly positive                 00398799         
+ 000724 47A0 B07E            0072E   202          BC    B'1010',POS   if it is then skip                         00398899         
+ 000728 FA10 B33A B149 009EA 007F9   203          AP    PNUMN,=PL1'1' add one to the loss count                  00398999         
+ 00072E FA10 B338 B149 009E8 007F9   204 POS      AP    PNUMP,=PL1'1' add one to profit count                    00399099         
+ 000734 F922 B33C 301E 009EC 0001E   205          CP    PMAX,VALUE    compare current max to value               00399199         
+ 00073A 47B0 B09A            0074A   206          BC    B'1011',LOW   If value if Lower then skip                00399299         
+ 00073E F822 B33C 301E 009EC 0001E   207          ZAP   PMAX,VALUE    Make value new max                         00399399         
+ 000744 D21D B274 3000 00924 00000   208          MVC   MOST(30),DESCR  Move the description to print line       00399499         
+ 00074A                              209 LOW      DS    0H                                                       00399599         
+ 00074A F922 B33F 301E 009EF 0001E   210          CP    PMIN,VALUE    Check if value if higher than low          00399699         
+ 000750 47D0 B0B0            00760   211          BC    B'1101',HIGH  If it is then skip                         00399799         
+ 000754 F822 B33F 301E 009EF 0001E   212          ZAP   PMIN,VALUE    else make value new min                    00399899         
+ 00075A D21D B2B9 3000 00969 00000   213          MVC   LEAST(30),DESCR  transfer the description to line        00399999         
+ 000760                              214 HIGH     DS    0H                                                       00400099         
+ 000760 4130 3024            00024   215          LA    3,36(,3)      advance table ptr                          00400199         
+ 000764 47F0 B04C            006FC   216          B     COUNT         return to loop top                         00400299         
+ 000768 D203 B1F3 B140 008A3 007F0   217 CEND     MVC   TOTAL(4),=X'40202020'  Format edit pattern               00400399         
+ 00076E DE03 B1F3 B336 008A3 009E6   218          ED    TOTAL,PNUM             transfer pnum to total            00400499         
+ 000774 D203 B249 B140 008F9 007F0   219          MVC   NTOTAL(4),=X'40202020' format edit pattern               00400599         
+ 00077A DE03 B249 B33A 008F9 009EA   220          ED    NTOTAL,PNUMN           move num losses to ntotal         00400699         
+ 000780 D203 B21E B140 008CE 007F0   221          MVC   PTOTAL(4),=X'40202020' format edit pattern               00400799         
+ 000786 DE03 B21E B338 008CE 009E8   222          ED    PTOTAL,PNUMP           move num profits to ptotal        00400899         
+ 00078C D206 B2FE B14A 009AE 007FA   223          MVC   SUM(7),=X'402021204B2020' format edit pattern            00400999         
+1                                                                                                               PAGE    5         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 000792 4110 B301            009B1   224          LA    1,SUM+3                                                  00401099         
+ 000796 DF06 B2FE B342 009AE 009F2   225          EDMK  SUM(7),PSUM            move total profit to sum          00401199         
+ 00079C 0610                         226          BCTR  1,0                    format for $                      00401299         
+ 00079E 925B 1000      00000         227          MVI   0(1),C'$'              add the $ to front of sum         00401399         
+ 0007A2 D203 B32F B144 009DF 007F4   228          MVC   AVG(4),=X'204B2020'    format the edit pattern           00401499         
+ 0007A8 F832 B345 B342 009F5 009F2   229          ZAP   PAVG,PSUM              copy sum to avg                   00401599         
+ 0007AE FD31 B345 B336 009F5 009E6   230          DP    PAVG,PNUM              calculate the avg                 00401699         
+ 0007B4 DE06 B32F B345 009DF 009F5   231          ED    AVG(7),PAVG            format edit pattern for avg       00401799         
+ 0007BA E020 B1CC 002B 0087C         232          XPRNT TLINE,43               print many lines                  00401899         
+ 0007C0 E020 B1F7 002B 008A7         233          XPRNT PTLINE,43                                                00401999         
+ 0007C6 E020 B222 002B 008D2         234          XPRNT NTLINE,43                                                00402099         
+ 0007CC E020 B24D 0041 008FD         235          XPRNT MPLINE,65                                                00402199         
+ 0007D2 E020 B292 0041 00942         236          XPRNT LPLINE,65                                                00402299         
+ 0007D8 E020 B2D7 002E 00987         237          XPRNT SLINE,46                                                 00402399         
+ 0007DE E020 B305 0031 009B5         238          XPRNT ALINE,49                                                 00402499         
+                                     239 *                                                                       00402535         
+ 0007E4 58D0 D004            00004   240          L     13,4(,13)      exit linkage                              00402699         
+ 0007E8 98EC D00C            0000C   241          LM    14,12,12(13)                                             00402716         
+ 0007EC 07FE                         242          BR    14             return to main                            00402899         
+                                     243 *********************************************                           00402916         
+                                     244 * STATS VARIABLES                                                       00403016         
+                                     245 *********************************************                           00403116         
+                                     246          LTORG                                                          00403216         
+ 0007F0 40202020                     247                =X'40202020'                                                              
+ 0007F4 204B2020                     248                =X'204B2020'                                                              
+ 0007F8 0C                           249                =PL1'0'                                                                   
+ 0007F9 1C                           250                =PL1'1'                                                                   
+ 0007FA 402021204B2020               251                =X'402021204B2020'                                                        
+ 000804                              252 SSAVE    DS    18F                                                      00403316         
+ 00084C F1                           253 SHEAD    DC    C'1'                                                     00403435         
+ 00084D 4040404040404040             254          DC    CL12' '                                                  00403535         
+ 000859 E2A494948199A840             255          DC    CL35'Summary of Susans Business Ventures'                00403635         
+ 00087C 60                           256 TLINE    DC    C'-'                                                     00403773         
+ 00087D E396A381934095A4             257          DC    CL26'Total number of ventures ='                         00403873         
+ 000897 4040404040404040             258          DC    CL12' '                                                  00403999         
+ 0008A3                              259 TOTAL    DS    CL4                                                      00404089         
+ 0008A7 60                           260 PTLINE   DC    C'-'                                                     00404199         
+ 0008A8 D5A4948285994096             261          DC    CL31'Number of profitable ventures ='                    00404299         
+ 0008C7 40404040404040               262          DC    CL7' '                                                   00404399         
+ 0008CE                              263 PTOTAL   DS    CL4                                                      00404499         
+ 0008D2 60                           264 NTLINE   DC    C'-'                                                     00404599         
+ 0008D3 D5A4948285994096             265          DC    CL27'Number of losing ventures ='                        00404699         
+ 0008EE 4040404040404040             266          DC    CL11' '                                                  00404799         
+ 0008F9                              267 NTOTAL   DS    CL4                                                      00404899         
+ 0008FD 60                           268 MPLINE   DC    C'-'                                                     00404999         
+ 0008FE D496A2A340979996             269          DC    CL24'Most profitable venture:'                           00405099         
+ 000916 4040404040404040             270          DC    CL14' '                                                  00405199         
+ 000924                              271 MOST     DS    CL30                                                     00405299         
+ 000942 60                           272 LPLINE   DC    C'-'                                                     00405399         
+ 000943 D38581A2A3409799             273          DC    CL25'Least profitable venture:'                          00405499         
+ 00095C 4040404040404040             274          DC    CL13' '                                                  00405599         
+ 000969                              275 LEAST    DS    CL30                                                     00405699         
+ 000987 60                           276 SLINE    DC    C'-'                                                     00405799         
+ 000988 E396A3819340A581             277          DC    CL30'Total value for all ventures ='                     00405899         
+ 0009A6 4040404040404040             278          DC    CL8' '                                                   00405999         
+ 0009AE                              279 SUM      DS    CL7                                                      00406099         
+ 0009B5 60                           280 ALINE    DC    C'-'                                                     00406199         
+1                                                                                                               PAGE    6         
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                       
+ 0009B6 C1A5859981878540             281          DC    CL32'Average value for all ventures ='                   00406299         
+ 0009D6 4040404040404040             282          DC    CL9' '                                                   00406399         
+ 0009DF                              283 AVG      DS    CL7                                                      00406499         
+ 0009E6                              284 PNUM     DS    PL2'0'                                                   00406589         
+ 0009E8                              285 PNUMP    DS    PL2'0'                                                   00406690         
+ 0009EA                              286 PNUMN    DS    PL2'0'                                                   00406790         
+ 0009EC                              287 PMAX     DS    PL3'0'                                                   00406899         
+ 0009EF                              288 PMIN     DS    PL3'0'                                                   00406999         
+ 0009F2                              289 PSUM     DS    PL3'0'                                                   00407099         
+ 0009F5                              290 PAVG     DS    PL4'0'                                                   00407199         
+                                     291 *********************************************                           00407217         
+                                     292          END   MAIN                                                     00407317         
+0***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                      
+0*** DYNAMIC CORE AREA USED:  LOW:   16424 HIGH:    1696 LEAVING:  475448 FREE BYTES. AVERAGE:       61 BYTES/STMT ***            
+0*** ASSEMBLY TIME =    0.000 SECS,   293000 STATEMENTS/SEC ***                                                                   
+0*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                       
+1                 Susans Business Ventures                                                                                        
+-     Description                                Value                                                                            
+0     Burglar Alarm Tester                     $12.00                                                                             
+0     Button Reattachment                       $6.50                                                                             
+0     Cat Sweaters                             $48.00  CR                                                                         
+0     Cell Phone Sanitizer                     $14.69  CR                                                                         
+0     Chinese Food Delivery                    $47.50                                                                             
+0     Custom Bookmarks                          $8.95                                                                             
+0     Deadline Reminder Service                $72.00                                                                             
+0     Garlic-scented Perfume                   $39.80  CR                                                                         
+0     Iguana Walker                            $11.50                                                                             
+0     Knitting Needle Sharpener                 $0.00                                                                             
+0     Lecture Note Transcription              $112.00                                                                             
+0     Lost Glove Replacement                   $13.75                                                                             
+0     Mousetrap Improver                       $25.82  CR                                                                         
+0     Mustard Milkshake Mixes                  $15.00  CR                                                                         
+0     Parakeet Music Training                  $10.00                                                                             
+0     New Password Supply                      $36.00                                                                             
+0     Nostalgic Ear Trumpets                   $34.60  CR                                                                         
+0     Water Bottle Refiller                     $0.00                                                                             
+0     Umbrella Repair                          $12.00                                                                             
+0     Yodel Instructor                         $14.00                                                                             
+1            Summary of Susans Business Ventures                                                                                  
+-Total number of ventures =              20                                                                                       
+-Number of profitable ventures =         12                                                                                       
+-Number of losing ventures =              6                                                                                       
+-Most profitable venture:              Lecture Note Transcription                                                                 
+-Least profitable venture:             Cat Sweaters                                                                               
+-Total value for all ventures =        $178.29                                                                                    
+-Average value for all ventures =         8.91                                                                                 
+0*** EXECUTION TIME =    0.000 SECS.       830 INSTRUCTIONS EXECUTED -   830000 INSTRUCTIONS/SEC ***                              
+0*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                

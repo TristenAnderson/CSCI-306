@@ -1,0 +1,157 @@
+
+<!-- saved from url=(0060)http://faculty.cs.niu.edu/~hutchins/csci360/homework/hw6.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Assignment 6</title>
+</head>
+
+<body data-gr-c-s-loaded="true">
+
+<center>
+<h2><b>
+<p>Assignment 6
+</p></b><p><b>100 points
+</b></p></h2></center>
+
+<p><b>Overview</b>
+
+</p><p>A beginning entrepreneur named Susan Glimpshire has been trying 
+   a number of small business ventures.  While she is rather creative, 
+   she is not always successful.  She made money on some of them and on 
+   others she lost money (cats don't like to wear sweaters, for instance).
+
+</p><p>In this assignment, we have data about Susan's ventures.  We will store the
+   data in a table, print the table and then calculate and print some
+   statistics about Susan's progress.
+
+</p><p>In particular, this program will make use of external subroutines, 
+   character data and packed decimal numbers.
+
+</p><p></p><hr>
+
+<p><b>Input</b>
+
+</p><p>The input to the program will be a file with an unknown number of records.  
+
+</p><p>Each record represents a single business venture and has the following format:
+
+</p><pre>     columns         description
+     -------         -----------
+      1 - 30         Description (characters)
+     31 - 32         blanks             
+     33 - 37         Profit or Loss (5 digits zoned decimal)
+     38 - 80         not used (blanks)
+</pre>
+
+<p>A positive value indicates that Susan made a profit, and a negative
+   value indicates that Susan lost money.
+
+</p><p>Use the following JCL statement to specify the input file:
+
+</p><pre>//FT05F001  DD  DSN=KC02314.SPRING20.CSCI360.HW6DATA,DISP=SHR</pre>
+
+<p></p><hr>
+
+<p><b>Processing Requirements</b>
+
+</p><p>The main program will carry out the following steps:
+
+</p><ul list-style-type="DISC">
+ <li>Call subroutine BUILD to read the first group of records and store 
+     the data in a table.  
+     <p>
+ </p></li><li>Call subroutine PRINT to print the contents of the table, using 
+     column headings.  
+     <p>
+ </p></li><li>Call subroutine STATS to calculate and print a number of statistics (see below).
+</li></ul> 
+
+<p>For each subroutine, you can use the same parameter list:
+     </p><ul list-style-type="CIRCLE">
+      <li>the address of the table
+      </li><li>the address of a fullword containing the address of the first
+          unused entry
+     </li></ul>      
+
+<p></p><hr>
+
+<p><b>What statistics do we need?</b>
+
+</p><p>The STATs subroutine should calculate and print:
+   </p><ul>
+    <li>How many business ventures were there?
+    </li><li>How many of them made money (positive value)?
+    </li><li>How many of them lost money (negative value)?
+    </li><li>Which venture had the largest profit?
+    </li><li>Which venture had the greatest loss?
+    </li><li>What was the grand total for all ventures together?
+    </li><li>What was the average result per venture? (rounded to the nearest penny)
+   </li></ul>
+   
+<p></p><hr>
+
+<p><b>Other Notes</b>
+
+</p><ol>
+ <li>You may assume that the table needs to hold no more than 25
+     values.
+     <p>
+ </p></li><li>Use this DSECT to describe a table entry:
+<pre>     $ENTRY   DSECT
+     $DESCR   DS    30C
+     $VALUE   DS    PL3</pre>
+     <p>
+     </p><p>Put the DSECT at the top before MAIN.
+     </p><p> 
+ </p></li><li>Write this program incrementally, one subroutine at a time.  Start 
+     with BUILD.  You may want to XDUMP the table to see whether BUILD is
+     correct.  After that, write and test PRINT.  Once you have PRINT
+     working, you can go on to STATS.
+     <p>
+ </p></li><li>The JCL for this assignment is the same as the JCL used in
+     Assignments 4 and 5 except for the line given above to provide
+     the data.
+     <p>
+ </p></li><li>All of these subroutines are external subroutines.  You will
+     need standard entry and exit linkage in the main routine and in
+     each subroutine.
+     <p>
+ </p></li><li>You may not use XDECI or XDECO anywhere in this assignment.
+     The numbers should all be stored in packed decimal format.
+     You will need to decide on the lengths to use.
+     <p>
+ </p></li><li>When you print amounts of money, print a leading dollar sign,
+     a decimal point and two digits to the right of the decimal
+     point.  If an amount of money is negative, print <u>CR</u>
+     to the right of the value.
+     <p>
+ </p></li></ol>
+
+<p></p><hr>
+
+<p><b>Output</b>
+
+</p><p>Each page should have a page heading, centered.  The pages should be
+   numbered.
+
+</p><p>Column headings should be double-spaced from the page header.
+
+</p><p>PRINT should have a page heading saying something like "Susan's 
+   Business Ventures".  
+
+</p><p>In the output from PRINT, the lines of customer information should be 
+   double spaced.  The output from PRINT should all fit on one page.
+
+</p><p>In the output from PRINT, the summary lines should be triple-spaced from 
+   the last customer record.  Double-space between summary lines.
+
+</p><p>STATS should start its output on a new page.  There should be a page
+   heading saying something like "Summary of Susan's Business Ventures".
+
+</p><p>In the output from STATS, the lines should be triple-spaced.
+
+</p><p>The output from STATS should all fit on one page.
+
+
+
+
+</p></body></html>

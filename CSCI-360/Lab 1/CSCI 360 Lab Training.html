@@ -1,0 +1,442 @@
+
+<!-- saved from url=(0060)http://faculty.cs.niu.edu/~hutchins/csci360/homework/hw0.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">                               
+<title>CSCI 360 Lab Training</title>
+</head>
+
+<body data-gr-c-s-loaded="true">
+
+<center>
+<b><h2>
+<p>Assignment 0
+</p><p>Lab Training
+</p><p>10 points
+</p></h2></b>
+</center>
+
+<p>The purpose of this lab session is to introduce you to TSO ("Time-Sharing Option") 
+   and ISPF (an environment running inside TSO) so that you will be able to submit and 
+   run Assembly language programs throughout the term.
+
+</p><p></p><hr>
+
+<p><b>Step One:  Connect to the Marist system</b>
+
+</p><p>Open the Vista TN3270 emulator from the start menu.
+
+</p><p>Enter the following values in the dialog box that appears and
+   then select “Connect”:
+
+</p><p><b>Host:</b> zos.kctr.marist.edu<br>
+<b>Port:</b> 1023
+
+</p><p>After you have successfully connected to the Marist system, you will
+   see a welcome screen with a flashing cursor. Type in “L TSO”
+   (no quotes).
+
+</p><p>You should now be at the screen to enter your id number. This is where
+   you will type in the KC-id that was provided by your instructor. Press
+   Enter.
+
+</p><p>A new screen should appear with an option to enter your password. Your
+   initial password is the same as your KC-id number. After you have typed
+   in the initial password, tab over to the New Password option and enter
+   a new password.  It must be <u>exactly</u> 8 characters in length and
+   made up of letters and digits.  Press Enter. You will then be prompted
+   to re-enter your new password. Do so and press Enter again.
+
+</p><p>After the 3 asterisks, type <u>ispfinit</u> if this is the first time
+   that you've logged in to TSO or just <u>ispf</u> if you have logged
+   in before. Press Enter.  (You only need to do this once.)
+
+</p><p>Congratulations! You are now fully logged on to the Marist system.
+
+</p><p></p><hr>
+
+<p><b>Step Two:  Create a data set to hold your programs</b>
+
+</p><p>Before you can start to write an Assembly language program, you must
+   first create a data set that will hold all of your programs. This is
+   what is called a "partitioned data set" or "PDS".  It is similar to a
+   folder or a directory in Windows or UNIX.  To do this, select option
+   3 (Utilities) from the ISPF Primary Option Menu by typing 3 after
+   the Option ===&gt;. Press Enter. You should now be at the Utility
+   Selection Panel. Enter option 2 (Data Set) after the Option ===&gt;.
+   Press Enter.
+
+</p><p>On the Data Set Utility screen, use the Tab key or the mouse to
+   move to the different fields:
+
+</p><ul>
+ <li>enter A after the Option ===&gt; so that you can allocate a data set
+ </li><li><b>Project:</b> Type in your KC-id number
+ </li><li><b>Group:</b> Type in a Group Name:  it can be whatever you like,
+        but maybe try something like CSCI360
+ </li><li><b>Type:</b> Pick a library name, maybe something like ASSIGNS
+</li></ul>
+
+<p>Once all of the information has been entered, press Enter.
+
+</p><p>On the Allocate New Data Set screen, enter the following values:
+
+<table style="border-collapse: collapse;" width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+   <tr>
+    <td width="40%" height="20">Space Units</td>
+    <td width="60%" height="20">TRKS</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Primary Quantity</td>
+    <td width="60%" height="20">20</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Secondary Quantity</td>
+    <td width="60%" height="20">20</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Directory Blocks</td>
+    <td width="60%" height="20">15</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Record Format</td>
+    <td width="60%" height="20">FB</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Record Length</td>
+    <td width="60%" height="20">80</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Block Size</td>
+    <td width="60%" height="20">4000</td>
+   </tr>
+   <tr>
+    <td width="20%" height="20">Data Set Name Type</td>
+    <td width="80%" height="20">PDS</td>
+   </tr>
+  </tbody>
+ </table>
+
+</p><p>Leave the other options with the default values. Press Enter. You
+   should now see the message “Data Set Allocated” in the
+   upper right hand corner.
+
+</p><p></p><hr>
+
+<p><b>Step Three:  Create a data set to hold your output files</b>
+
+</p><p>Now let's allocate a second partitioned data set that can be used
+   to hold output files.  On the Data Set Utility screen, again, use
+   the Tab key or the mouse to move to the different fields:
+
+</p><ul>
+ <li>enter A after the Option ===&gt; so that you can allocate a data set
+ </li><li><b>Project:</b> Type in your KC-id number (if it's not already filled in)
+ </li><li><b>Group:</b> Type in a Group Name (if it's not already filled in, make
+        it the same thing as above)
+ </li><li><b>Type:</b> Pick a library name, maybe something like OUTPUT
+</li></ul>
+
+<p>Once all of the information has been entered, press Enter.
+
+</p><p>On the Allocate New Data Set screen, enter the following values:
+
+<table style="border-collapse: collapse;" width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+   <tr>
+    <td width="40%" height="20">Space Units</td>
+    <td width="60%" height="20">TRKS</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Primary Quantity</td>
+    <td width="60%" height="20">20</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Secondary Quantity</td>
+    <td width="60%" height="20">20</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Directory Blocks</td>
+    <td width="60%" height="20">15</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Record Format</td>
+    <td width="60%" height="20">VB</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Record Length</td>
+    <td width="60%" height="20">134</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Block Size</td>
+    <td width="60%" height="20">4000</td>
+   </tr>
+   <tr>
+    <td width="20%" height="20">Data Set Name Type</td>
+    <td width="80%" height="20">PDS</td>
+   </tr>
+  </tbody>
+</table>
+
+</p><p>Leave the other options with the default values. Press Enter. You
+   should now see the message “Data Set Allocated” in the
+   upper right hand corner.
+
+</p><p></p><hr>
+
+<p><b>Step Four:  Write your program</b>
+
+</p><p>Before we can write the program, we have to provide a name for
+   the file.
+
+</p><p>At the Option ===&gt; prompt, type =2. The Edit Entry Panel screen
+   will appear.  For Project, enter your KC-id number. For Group,
+   enter the group name that you used previously (CSCI360). For Type,
+   enter the library name that you used previously (ASSIGNS). For
+   Member, pick a file name – you can name your programs
+   whatever you would like but for today, use LAB. Press Enter.
+
+</p><p>You should now be at the editing screen. Continually press the Tab
+   key or use the mouse until you are to the right of the first line
+   of …...  This is the first line of your file.
+
+</p><p>Type in the following program:
+
+</p><p><i><u><b>NOTE:</b></u></i> After typing the first line of the program
+   and pressing Enter, it's possible that the BOTTOM OF DATA line of
+   starts will appear. If this happens, use the mouse and click on the
+   line number next to the first line (most likely 0001000), place an
+   'I' (no quotes) anywhere in the number and press Enter, this will
+   allow you to 'Insert' data.
+
+</p><p><u>Be sure to make the following replacements in the code:</u>
+
+</p><ul>
+ <li>your_id with your KC-id number followed by a single letter
+ </li><li>your name with your name
+</li></ul>
+
+<pre>//your_id JOB ,'your name',MSGCLASS=H
+//STEP1 EXEC PGM=ASSIST
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+********************************************
+* EXAMPLE PROGRAM
+*
+* NAME:  your name here
+*
+* Register Usage
+*
+*  1     Total 
+*  4     Counter
+* 15     Base register
+*
+********************************************
+MAIN     CSECT
+         USING MAIN,15
+         SR    1,4     Total = ZERO
+         SR    1,4     Serial number = ZERO
+         XDUMP
+         BR    14
+         END   MAIN
+/*
+//</pre>
+
+<p>The //, *, MAIN,  and /* should all start in column 1. The USING,
+   SR, XDUMP, BR, and END should all start in column 10. The MAIN
+   (after USING), 4, 5, 14, and MAIN (after END) should start in
+   column 16. Use the space bar to line up the information.
+   <i><u><b>Do not use TAB in mainframe files.</b></u></i>
+
+</p><p>A common error here is to leave out the letter after your KC number
+   in the JOB line.  The value here is called the <u>job name</u>
+   and must be 8 characters long.  (a KC number is 7 characters long).
+   If you do not supply the letter, you will be asked for it later.
+
+</p><p>After the program is typed in, use the mouse to go to COMMAND ===&gt;
+   and type in SAVE. Your dataset should now be saved. It is also a good
+   idea to get into the habit of saving your program as you type as
+   programs get longer.
+
+</p><p></p><hr>
+
+<p><b>Step Five:  Run the program and look at the output</b>
+
+</p><p>To submit the file to run, type SUBMIT or SUB at the COMMAND===&gt; .
+   You should see a message toward the bottom of the screen that your
+   JOB has been submitted. Take note of the JOB number (such as JOB01234)
+   that is inside of the parenthesis.
+
+</p><p>Press Enter to return to your code. You now have two options to get
+   to view output: 1) press the F3 button until you return to the ISPF
+   Primary Option menu and then select option SD (SDSF) or 2) enter =SD
+   at the COMMAND===&gt; prompt and press Enter.
+
+</p><p>Type OWNER followed by your KC-id number at the COMMAND INPUT prompt.
+   Press Enter. <i><b>(You only need to do this once, the first time you
+   use option SD.)</b></i>  If you forget to do this, you will get a list
+   of everyone's output files, not just your own.
+
+</p><p>Select option STATUS or ST. Press Enter. You should now see all of the
+   tasks/jobs that are owned by you.
+
+</p><p>Find the JOB number that matches the one that was displayed when the
+   program was submitted (usually the last one) and type S or SE to the
+   left of the name. Press Enter. The only difference between the two
+   options is that SE will allow you to edit the output file.  (You
+   seldom want to edit it.)
+
+</p><p>The output produced by your Assembly code should now be open. To view
+   the output, page down until you see your code by continuously pressing
+   the F8 key or the Page Down key (if it works). The output of the
+   program will be at the end of the file. It's two lines, both of which
+   start with REGS. If you don't see the lines, something is wrong with
+   your program and you need to go back and make changes to your program
+   file and repeat the submission process.
+
+</p><p>If the output is correct, let's save it to the OUTPUT directory that was
+   created earlier. If you're still viewing the output, press F3 to return
+   to the job listing page.
+
+</p><p>If you want to save an output file, type XDC to the left of the file
+   you want to save and press Enter. On the SDSF Open Print Data Set
+   Panel, enter the following, making sure to use the names you chose
+   earlier:
+</p><ul>
+ <li>Data Set Name: KC-id.CSCI360.OUTPUT
+ </li><li>Member to Use: whatever name you want, maybe something like LABOUT
+ </li><li>Disposition: OLD
+</li></ul>
+
+<p>Verify that the file values match what was entered earlier:
+<table style="border-collapse: collapse;" width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+   <tr>
+    <td width="40%" height="20">Space Units</td>
+    <td width="60%" height="20">TRKS</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Primary Quantity</td>
+    <td width="60%" height="20">10</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Secondary Quantity</td>
+    <td width="60%" height="20">10</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Record Format</td>
+    <td width="60%" height="20">VB</td>
+   </tr>
+   <tr>
+    <td width="40%" height="20">Record Length</td>
+    <td width="60%" height="20">134</td>
+   </tr>
+  </tbody>
+</table>
+
+</p><p>A common minor error we sometimes see here is that the Data Set
+   Name is shown as "KC-id.KC-id.CSCI360.OUTPUT", that is, the
+   KC-id is listed twice.  If this happens, fix it be deleting one of them.
+
+</p><p>Press Enter. Your output file has now been created and you should be
+   back at the JOB listings. The file that was created can be FTP'd to
+   your local machine if you would like to print it or view it with an
+   editor on your local machine.  We'll cover this later.
+
+</p><p>To delete an output file, put a P to the left of the job number
+   and follow the directions. You should make it a habit of purging your
+   jobs when you're done looking at the output.  Do not try to purge 
+   a job marked "TSU".
+
+</p><p></p><hr>
+
+<p><b>End the session</b>
+
+</p><p>Once you have finished using the Marist system, press the F3 key
+   until you get back to the ISPF Primary Option Menu. Press F3 once
+   again. You will either exit the ISPF system and see the main TSO
+   command line, or see the Specify Disposition of Log Data Set.
+
+</p><p>Press 2 to delete your history information about this session. The
+   word READY should appear in the upper left hand corner. Type LOGOFF
+   to logoff of the Marist system. <i><u><b>It is important that you
+   logoff when you are done. Don't just close the window.</b></u></i>
+
+</p><p></p><hr>
+
+<p><b>Some TSO tidbits</b>
+
+</p><p>If you would like to see a list of the files that you have on your
+   account, from the ISPF Primary Options Menu, select option 3 (Utilities).
+   The Utility Selection Panel should now be showing. Select option 4
+   (Dslist) from the menu. Press Enter.  At the DSNNAME LEVEL field,
+   type in your KC-id number and press Enter. You should now see a
+   listing of all of the files that belong to you. There should be
+   a number of files.  Search through the list until you see the one with
+   the names that you entered earlier. You may have to use the F8 button
+   to page down if there are too many files to fit on one screen.
+
+</p><p>To edit the file, type “E” (no quotes) to the left of
+   the file name. You can either tab down to the file name or click
+   with your mouse. The EDIT Entry Panel should now be open. Press Enter.
+   The data set is now open.
+
+</p><p>To delete the file, type “D” (no quotes) to the left
+   of the file name and Press Enter. The data set should have a
+   “Deleted” message after the name.
+
+</p><p>The "caps mode" controls whether alphabetic text you type into 
+   your file is automatically converted to upper case.  You can
+   control this:  at the command line, type "CAPS ON" or "CAPS OFF".
+
+</p><p>The ISPF environment can be very useful.  You can, for instance,
+   toggle between two screens.  You should be able to find 
+   tutorials on line.
+
+</p><p></p><hr>
+
+<p><b>FTP (File Transfer Protocol)</b>
+
+</p><p>The output file and source code files from earlier can be transferred to
+   your local machine by starting any FTP program (Filezilla, 
+   mar_ftp, etc.).  Set up a connection to Marist using the 
+   information (zos.kctr.marist.edu and KC-id number) from earlier,
+   as well as your password.  Use the default Port number (do not change it).
+
+</p><p>For most of the FTP programs, you should see your local files on the
+   left side of the screen and your Marist files on the right side of the
+   screen. Find your output file (KC-id.CSCI360.OUTPUT will probably
+   look like a folder that you can click on). After clicking on the
+   folder, you should see a file with the same name that you entered
+   for the “Member to Use” option above (maybe LABOUT).
+   Transfer the file to your local machine by double clicking the file
+   name or highlighting it and selecting the Download option.
+
+</p><p>The file is now saved on your local machine and can be opened in an
+   editor if you would like to view or print the output. This is also
+   the file that will be submitted to Blackboard.
+
+</p><p>Follow the same process to get your source code file.
+
+</p><p>You can also use FTP to send a file in the other direction.  You can
+   write your program file at the NIU end using Notepad or Notepad++ or
+   some other text editor.  Save it as an absolutely plain text file and 
+   give it a name (up to 8 characters) such as "PROG5" with no extension.  
+   Send it to the Marist site to be a member of the PDS called ASSIGNS.  
+   You should now be able to access it using TSO.
+
+</p><p>The mar_ftp program is a tiny text-based program which makes use
+   of the Windows ftp program.  It has a simple menu with only a few
+   options.  It can be used the submit a job, check on its status, and 
+   fetch the output file.  It can also be used simply to fetch the
+   output file after you run the job using TSO.  What mar_ftp does not
+   do is delete the output files from your Marist account, so you
+   will need to log on to TSO to do this for yourself.  If you
+   are interested, look for mar_ftp on the department web site under
+   "Resources and Publications" and then "Computing Resources.".
+
+
+
+
+
+</p></body></html>

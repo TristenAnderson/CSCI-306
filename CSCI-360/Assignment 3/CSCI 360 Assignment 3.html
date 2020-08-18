@@ -1,0 +1,183 @@
+
+<!-- saved from url=(0060)http://faculty.cs.niu.edu/~hutchins/csci360/homework/hw3.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>CSCI 360 Assignment 3</title>
+</head>
+
+<body data-gr-c-s-loaded="true">
+
+<center>
+<h2><b>
+<p>Assignment 3
+</p></b><p><b>100 points
+</b></p></h2></center>
+
+
+<p><b>Overview</b>
+
+</p><p>For this assignment, write a program that will produce a sales
+   report for a company called Get-It-From-Us.  They are offering
+   discounts and free shipping for sufficiently large orders.  For
+   one product, there is a promotional discount.
+
+</p><p></p><hr>
+
+<p><b>Input</b>
+
+</p><p>The input to the program will be a file with an unknown number of
+   records.  Each record represents a single sale and has the following
+   format:
+
+</p><pre>     columns         description
+     -------         -----------
+      1 - 6          Product ID
+      7 - 8          spaces
+      9 - 15         Order ID
+     16 - 17         spaces
+     18 - 20         Number Ordered
+     21 - 22         spaces         
+     23 - 26         Price Each (in cents)
+     27 - 80         spaces</pre>
+
+<p>Use the following JCL statement to specify the input file:
+
+</p><pre>//FT05F001  DD  DSN=KC02314.SPRING20.CSCI360.HW3DATA,DISP=SHR</pre>
+
+<p></p><hr>
+
+<p><b>Processing Requirements</b>
+
+</p><p>For this assignment, write a read loop that will process the input
+   one record at a time.
+
+</p><p>For each input record, print a detail line containing the input 
+   values along with the Discount, Shipping and Total Cost (in cents).
+
+</p><p>Use the following formulas (in this order) for your calculations:
+
+</p><pre>     PreTotal = Price Each * Number Ordered
+
+     If (PreTotal &gt;= 18000)
+       Then Discount = 600
+       Else Discount = 0
+     End If
+
+     If (Product ID == 566824)
+       Then Add 1000 to Discount        (this item is on sale)
+     End If
+
+     If (Product ID == 731128)
+       Then Add 1 to Number Ordered     (as in "buy one, get one free")
+     End If
+
+     If (PreTotal &gt;= 6000)
+       Then Shipping = 0
+       Else Shipping = 400
+     End If
+
+     Total Cost = PreTotal + Shipping - Discount</pre>
+
+<p>As you process records, count them and accumulate the Grand Total =
+   sum of Total Cost for all sales.  Also count sales for which Shipping
+   = 0.
+
+</p><p>After processing all of the input records, print summary lines
+   which tell us the number of sales, the number of sales with
+   Shipping = 0, the Grand Total and the average Total Cost per
+   Sale.
+
+</p><p>The average Total Cost should be rounded to the nearest cent. One 
+   possible way to do this is, after doing the division, calculate 2 
+   times the remainder and compare that product with the divisor. 
+   If 2 * the remainder is greater than or equal to the divisor, then 
+   the quotient should be rounded up up by 1.
+   
+</p><p></p><hr>
+
+<p><b>Other Requirements</b>
+
+</p><ol>
+  <li><p>Use <code>TITLE 'Your Name, CSCI 360, Program 3'</code>.
+
+  </p></li><li><p>Use <code>M, D, MR, DR, LA, XREAD, XDECI, XDECO, XPRNT, L, ST, C, A,
+         S, AR, SR, BC</code> and <code>BCR</code>, as appropriate.
+
+  </p></li><li><p>Use at least one literal in the program.
+
+  </p></li><li><p>You should use line documentation, documentation boxes,
+      and you are welcome to use <code>EJECT</code>, and 
+      <code>SPACE</code>.  You will be using various registers, and 
+      you do need to make a list of how you are using them.
+
+  </p></li><li><p>Write this program incrementally.  This will make it much easier to
+      debug.  Initially write the program so that it reads and processes
+      one record. Once you know it does that correctly, implement the
+      loop.  Once the loop is working correctly, add the code to count 
+      the sales, count those with free Shipping, etc.
+
+  </p></li><li><p>You may find that you run short of registers if your try to use 
+      them for all your variables.  You can use fullwords in memory
+      for some purposes such as counters.  When you want to increment 
+      the counter, load it into a register, add 1 and store it again.
+      That register is not then tied up and can be used for other purposes.
+
+  </p></li><li><p>The JCL for the program should now look like:
+</p><pre>//your_KC_id_plus_a_letter JOB ,'your name',MSGCLASS=H
+//STEP1 EXEC PGM=ASSIST
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+********************************************
+*
+*  The documentaton goes here.
+*
+********************************************
+/*
+//FT05F001 DD DSN=KC02314.SPRING20.CSCI360.HW3DATA,DISP=SHR
+//</pre>
+
+  </li><li><p>When you are debugging logic errors, don't be reluctant to
+  use XDUMP instructions to display registers and/or memory. Once you
+  get the program running, remove the XDUMPs from the run that is
+  turned in for grading.
+
+  </p><p>Feel free to test the program with your own data.  To do so,
+     temporarily replace the JCL line that starts with "//FT05F001" by
+
+</p><pre>     //FT05F001 DD *
+     your data goes here 
+     /*</pre>
+
+  <p>Make sure that the run you submit for grading uses the
+     file specified above.
+</p></li></ol>
+
+<p></p><hr>
+
+<p><b>Other Notes</b>
+
+</p><p>The page header for the report should start at the top of a new
+   page. The column headers should be double spaced from the page
+   header. The sales information lines should be double spaced. The
+   summary lines should be triple spaced from the last sales record.
+   Double-space between summary lines.
+
+</p><p>Notice that we are printing amounts of money simply as numbers of 
+   cents.  Later in the course, we will have ways to format numbers
+   more precisely.
+
+</p><p>You may need to put a label on a line now and then when you are not 
+   yet sure what instruction should be on that line.  In that case,
+   you can just use:
+
+</p><pre>     MYLABEL  DS   0H</pre>
+
+<p>The "DS 0H" part allocates zero halfwords on a halfword boundary.
+   Instruction are always on a halfword boundary anyway, so this does 
+   no harm and simply associates MYLABEL with an address.  The next
+   line will be at the same LOC value.
+
+
+
+
+</p></body></html>

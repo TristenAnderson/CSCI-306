@@ -1,0 +1,171 @@
+
+<!-- saved from url=(0060)http://faculty.cs.niu.edu/~hutchins/csci360/homework/hw5.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Assignment 5</title>
+</head>
+
+<body data-gr-c-s-loaded="true">
+
+<center>
+<h2><b>
+<p>Assignment 5
+</p></b><p><b>100 points
+</b></p></h2>
+</center>
+
+<p><b>Overview</b>
+
+</p><p>In this assignment, you will rewrite the program you wrote in
+   Assignment 4 using external subroutines instead of internal subroutines.
+   You will need to use standard entry linkage and exit linkage in the
+   main routine and in each subroutine.
+
+</p><p>There are a few minor changes and one additional subroutine.
+
+</p><p></p><hr>
+
+<p><b>Input</b>
+
+</p><p>The input to the program will be a file with an unknown number of
+   records.
+
+</p><p>The data starts with a number of lines very much like those in
+   the data for Assignment 4, followed by a line containing the 
+   integer -44444444.  This number serves as a delimiter and is not
+   part of the data.  After that are several lines each containing 
+   one small nonzero integer.
+
+</p><p>Use the following JCL statement to specify the input file:
+
+</p><pre>     //FT05F001  DD  DSN=KC02314.SPRING20.CSCI360.HW5DATA,DISP=SHR</pre>
+
+<p></p><hr>
+
+<p><b>What needs to be done</b>
+
+</p><ul>
+ <li>Call the BUILD subroutine to read lines in the file until it
+     find the delimiter line.  Each line contains zero or more 
+     integers.  Put the integers in the table.  Do not put the
+     delimiter value -44444444 in the table.  Return to the
+     main program.
+     <p>
+ </p></li><li>After that, in the main routine, print a heading saying something 
+     like "Table Contents".
+     <p>
+ </p></li><li>Now call subroutine PRINT to print the contents of the table with 
+     6 numbers on each line.
+     <p>
+ </p></li><li>Next, call the HOWMANY subroutine which will read the rest of the file.
+  </li></ul>
+
+
+<p></p><hr>
+
+<p><b>External Subroutines</b>
+
+</p><p>You will need several external subroutines:
+
+</p><ul list-style-type="DISC">
+ <li>BUILD is a subroutine that will read the input file and build
+     the table.  It will store the address of the last entry in
+     a fullword passed in as its second parameter.
+     <p>The arguments for BUILD are:
+        </p><ul list-style-type="SQUARE">
+         <li>the address of the input buffer
+         </li><li>the address of the table
+         </li><li>the address of a fullword containing the address of the
+             first available entry
+        </li></ul>
+     <p>
+ </p></li><li>PRINT is a subroutine that will print the numbers in the table 
+     with 6 values per line, starting on a new page and double-spaced.
+     <p>The arguments for PRINT are:
+        </p><ul list-style-type="SQUARE">
+         <li>the address of the table
+         </li><li>the address of a fullword containing the address of the
+             next available entry
+        </li></ul>
+     <p>
+ </p></li><li>HOWMANY is a subroutine that will count numbers in the table that
+     are multiples of the last few numbers in the file.
+     <p>The arguments for TALLY are:
+        </p><ul list-style-type="SQUARE">
+         <li>the address of the input buffer
+         </li><li>the address of the table
+         </li><li>the address of a fullword containing the address of the
+             first available entry
+        </li></ul>
+</li></ul>
+
+<p>There are several requirements for using an external subroutine:
+
+</p><ul>
+ <li>Each external subroutine is actually a separate program.  You
+     need a <u>CSECT</u> with the name of the subroutine, as in:
+
+<pre>     BUILD    CSECT</pre>
+     <p>
+ </p></li><li>You need to create a <u>parameter list</u> for the subroutine (a set
+     of consecutive fullwords, each containing the address of a
+     parameter).  We did this with internal subroutines.
+     <p>
+ </p></li><li>You need to <u>call</u> the subroutine, as in:
+
+<pre>     LA      1,BPARMS         Parmlist for BUILD
+     L       15,=V(BUILD)     Get the address of BUILD  
+     BALR    14,15            Branch to BUILD</pre>
+
+     <p>Here the BALR instruction will set register 14 = the address
+        of the next instruction after the BALR.
+     </p><p>
+ </p></li><li>In the subroutine, you need a <u>register save area</u> and
+     <u>standard entry linkage</u>.  (You should probably go read
+        about standard entry linkage.)
+     <p>
+ </p></li><li>At the end of the subroutine, you need <u>standard exit linkage</u>.
+     (You should probably go read about standard exit linkage.)
+</li></ul>     
+
+<p></p><hr>
+
+<p><b>What does the HOWMANY subroutine do?</b>
+
+</p><p>The HOWMANY subroutine will read each line in the file after the 
+   delimiter.  For each line, it should do the following:
+   </p><ul list-style-type="SQUARE">
+    <li>extract the integer M on the line using XDECI
+    </li><li>in a loop, go through the table and count the multiples of M
+    </li><li>print a line stating the number of multiples of M in the table
+   </li></ul>
+
+<p></p><hr>
+
+<p><b>Other Requirements</b>
+
+</p><ul>
+ <li>The JCL for this assignment is the same as the JCL for
+     Assignment 4 except the line above to specify the input file.
+     <p>
+ </p></li><li>You may assume that the table needs to hold no more than
+     75 values.  You do not need to count the numbers.  Each entry
+     is one fullword.  Initialize the table to the value -16 (as
+     in 75F'-16').
+     <p>
+ </p></li><li>In PRINT, double-space between lines of numbers.
+     <p>    
+ </p></li><li>In HOWMANY, triple-space the lines of output.
+     <p>
+ </p></li><li>You may use register equates if you want, but it is not required.
+     <p>
+ </p></li><li>You may use extended mnemonics such as BH, BL, BNE, etc. for branch
+     instructions.
+     <p>
+ </p></li><li>Document your program as usual and submit it through Blackboard
+     as usual.
+</li></ul>
+
+
+
+
+</body></html>

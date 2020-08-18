@@ -1,0 +1,174 @@
+//KC03C96A JOB ,'Tristen Anderson',MSGCLASS=H                           00010000
+//STEP1 EXEC PGM=ASSIST                                                 00020000
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                        00030000
+//SYSPRINT DD SYSOUT=*                                                  00040000
+//SYSIN DD *                                                            00050000
+********************************************                            00060000
+*                                                                       00070000
+*  Program: ASSIGN4                                                     00080000
+*  Programmer: Tristen Anderson                                         00081000
+*                                                                       00082000
+*  Register Usage:                                                      00083000
+*                                                                       00084000
+*    15   BASE                                                          00085000
+*    11   Branch and Link                                               00086000
+*    12   Store PARMS                                                   00087043
+*    14   End of program                                                00088043
+*                                                                       00090000
+********************************************                            00100000
+MAIN     CSECT                                                          00101000
+         USING MAIN,15                                                  00102000
+         TITLE 'Tristen Anderson, CSCI 360, Program 4'                  00102100
+         LA    12,TABLE     Load addr of TABLE to R12                   00102304
+         ST    12,PARMS     Store TABLE addr in PARMS                   00102404
+         LA    12,EOT       Load addr of EOT to R12                     00102504
+         ST    12,PARMS+4   Store EOT in PARMS                          00102604
+         LA    12,ENDTABLE  Load table end to R12                       00102741
+         ST    12,PARMS+8   Store end table in PARMS                    00102804
+         LA    12,PARMS     Load addr of PARMS to R12                   00102904
+         BAL   11,BUILD     Build the table                             00103000
+         BAL   11,PRINT     Print all nums                              00103100
+         BAL   11,PRINTE    Print only even nums                        00103200
+         BR    14           End of program                              00103400
+         LTORG              Literals go here                            00103500
+*****************************                                           00103600
+*                                                                       00103700
+*  Register Usage:                                                      00103800
+*    1        XDECI                                                     00103900
+*    2        hold a num                                                00104077
+*    3        table ptr                                                 00104177
+*    4        EOT                                                       00104277
+*    5        table len                                                 00104377
+*    6        counter                                                   00104477
+*   11        return address                                            00104577
+*                                                                       00104600
+*****************************                                           00104700
+BUILD    DS    0H              Start BUILD                              00104805
+         SR    6,6             Clear out R6 for counter                 00104905
+         LM    3,5,0(12)       Load PARMS to R3, R4 and R5              00105055
+BLOOP    XREAD BUFFER,80       read a line                              00105105
+         BC    B'0100',BLEND   check if failed                          00105205
+         LA    1,BUFFER        Load addr of BUFFER to R1                00105305
+BLOOPIN  XDECI 2,0(0,1)        read a num from line                     00105405
+         BC    B'0001',BLOOP   return to top when end of line           00105505
+         A     6,=F'1'         Add one to count                         00105605
+         ST    2,0(0,3)        store the num in table                   00105705
+         LA    3,4(0,3)        advance the table ptr                    00105805
+         C     6,=F'60'                                                 00105937
+         BE    BLEND                                                    00106037
+         BC    B'1111',BLOOPIN return to top of inner loop              00106105
+BLEND    DS    0H              loop end                                 00106205
+         ST    3,EOT           store addr of first unused entry         00106340
+         BR    11                                                       00106400
+*****************************                                           00106500
+*                                                                       00106600
+* Register usage:                                                       00106700
+*                                                                       00106816
+*   2        Addr of print line                                         00106958
+*   3        Addr of TABLE                                              00107016
+*   4        addr of EOT                                                00107116
+*   5        Table Len                                                  00107216
+*   6        Num from Table                                             00107323
+*   7        Counter                                                    00107423
+*  11        Return Address                                             00107557
+*                                                                       00107600
+*****************************                                           00107700
+*                                                                       00107800
+PRINT    DS    0H                                                       00107900
+         XPRNT THEAD,53         Print header                            00108075
+         XPRNT SPACE,1                                                  00108159
+         LM    3,5,0(12)        Load params into R3 through R5          00108257
+         L     4,EOT            Load address of end of table to R4      00108357
+PLOOPO   LA    2,PLINE+1        Load addr of pline+1 to R2              00108457
+         MVI   PLINE+1,C' '     Clear out print line                    00108557
+         MVC   PLINE+2(83),PLINE+1   destructive overlap                00108657
+         SR    7,7              clear out R7 for line width count       00108757
+         CR    3,4              check if at end of table                00108857
+         BC    B'1010',PEND     if at end of table print line and end   00108957
+PLOOP    C     7,=F'7'          check if width is 7, start newline      00109057
+         BE    PEND2            if 7 make a new line                    00109157
+         L     6,0(0,3)         Load a number to R6 from table          00109457
+         XDECO 6,NUMB           Format number in base 10                00109557
+         MVC   0(12,2),NUMB     add a num to the pline                  00109657
+         LA    2,12(0,2)        advance pline by 12                     00109757
+         LA    3,4(0,3)         advance table ptr by 4                  00109857
+         A     7,=F'1'          add one to width counter                00109957
+         CR    3,4              check if at the end of table            00110057
+         BC    B'1010',PEND     if at end then print line and end       00110157
+         B     PLOOP            else return to top of loop              00110357
+PEND2    XPRNT PLINE,85         print the line                          00110457
+         B     PLOOPO           return to top to clear line             00110557
+PEND     XPRNT PLINE,85         print the line                          00110657
+         BR    11               return to main                          00110757
+*                                                                       00110858
+*****************************                                           00110900
+*                                                                       00111000
+* Register usage:                                                       00111100
+*                                                                       00111258
+*   2        Address of print line                                      00111358
+*   3        Address of TABLE ptr                                       00111458
+*   4        address of EOT                                             00111558
+*   5        table length                                               00111658
+*   6        hold a num from table                                      00111758
+*   7        width counter                                              00111858
+*   8        remainder of even check                                    00111958
+*   9        temp reg to divide by 2                                    00112058
+*                                                                       00112158
+*****************************                                           00112200
+PRINTE   DS    0H                                                       00112300
+         XPRNT SPACE,1       Print a blank line                         00112476
+         XPRNT THEADE,48     Print the table header                     00112576
+         XPRNT SPACE,1       Print a blank line                         00112676
+         LM    3,5,0(12)     load parms into R3 - R5                    00112776
+         L     4,EOT          Load EOT to R4                            00112876
+PELOOPO  LA    2,PLINE+1      Load PLINE+1 to R2                        00112976
+         MVI   PLINE+1,C' '   Clear print line                          00113076
+         MVC   PLINE+2(83),PLINE+1     destructive overlap              00113176
+         SR    7,7            clear width counter                       00113276
+         CR    3,4            check if at end of table                  00113376
+         BC    B'1010',PEEND  if at end branch to end                   00113476
+PELOOP   C     7,=F'5'        check if at 5 items on line               00113576
+         BE    PEEND2         if yes then print line                    00113676
+         L     6,0(0,3)       Load a num to R6 from table               00113776
+         LR    9,6            Load num to R9                            00113876
+         M     8,=F'1'        Create 64 bit num                         00113976
+         D     8,=F'2'        Divide by 2                               00114076
+         C     8,=F'0'        Check that remainder is 0 (even num)      00114176
+         BNE   SKIP           If not even then skip                     00114276
+         XDECO 6,NUMB         else print the number                     00114376
+         A     7,=F'1'        increment width counter                   00114476
+         MVC   0(12,2),NUMB     add num to print line                   00114576
+         LA    2,12(0,2)        advance print line                      00114676
+SKIP     LA    3,4(0,3)         advance table ptr                       00114776
+         CR    3,4              check if at end table                   00114876
+         BC    B'1010',PEEND    if at end then print and end            00114976
+         B     PELOOP           else return to top of loop              00115076
+PEEND2   XPRNT PLINE,61         print a line                            00115176
+         B     PELOOPO          return to outer loop                    00115276
+PEEND    XPRNT PLINE,61         print a line                            00115376
+         BR    11               return to main                          00115476
+*                                                                       00115500
+TABLE    DS    60F'-256'    Table of nums                               00115604
+ENDTABLE DS    0H           Mark table end                              00115739
+EOT      DS    A(TABLE)     Address of 1st unused entry                 00115856
+TABLELEN DS    F'0'                                                     00115950
+*                                                                       00116000
+TEST     DC    C' '                                                     00116131
+         DS    CL12                                                     00116231
+THEAD    DC    CL38'1'                                                  00116371
+         DC    CL15'List of Numbers'                                    00116461
+THEADE   DC    CL28'1'                                                  00116571
+         DC    CL20'List of Even Numbers'                               00116661
+NUMB     DS    CL12' '                                                  00116708
+SPACE    DC    C' '                                                     00116859
+PARMS    DS    F'0'                                                     00116904
+         DS    F'0'                                                     00117007
+         DS    F'0'                                                     00117107
+PLINE    DC    C'0'                                                     00117207
+         DS    CL84' '                                                  00117327
+BUFFER   DS    80C                                                      00117602
+         DC    C'*'                                                     00117704
+         END   MAIN                                                     00117800
+/*                                                                      00118000
+//FT05F001  DD  DSN=KC02314.SPRING20.CSCI360.HW4DATA,DISP=SHR           00120000
+//                                                                      00130000
